@@ -1,0 +1,102 @@
+.ts-h1 {
+    font-size: 36px;
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+.ts-h2 {
+    font-size: 32px;
+    letter-spacing: 2px;
+    line-height: 1.2;
+}
+.ts-h3 {
+    font-size: 28px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+.ts-h4 {
+    font-size: 24px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+.ts-xl {
+    font-size: 20px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+}
+.ts-l {
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: .5px;
+}
+.ts-md {
+    font-size: 16px;
+    line-height: 1.2;
+    letter-spacing: .5px;
+}
+.ts-sm {
+    font-size: 14px;
+    line-height: 1.2;
+    letter-spacing: .5px;
+}
+.ts-xs {
+    font-size: 11px;
+    line-height: 1.2;
+    letter-spacing: .5px;
+}
+
+.tw-very-heavy {
+    font-weight: 700;
+}
+.tw-heavy {
+    font-weight: 500;
+}
+.tw-normal {
+    font-weight: 400;
+}
+.tw-light {
+    font-weight: 300;
+}
+.tw-very-light {
+    font-weight: 100;
+}
+
+.tc-primary {
+    color: $primary
+}
+.tc-secondary {
+    color: $secondary
+}
+.tc-white{
+    color: white;
+}
+
+@media screen and (max-width: 768px) {
+    .ts-h1 {
+        font-size: 30px;
+    }
+    .ts-h2 {
+        font-size: 28px;
+    }
+    .ts-h3 {
+        font-size: 24px;
+    }
+    .ts-h4 {
+        font-size: 20px;
+    }
+    .ts-xl {
+        font-size: 18px;
+    }
+    .ts-l {
+        font-size: 16px;
+    }
+    .ts-md {
+        font-size: 14px;
+    }
+    .ts-sm {
+        font-size: 12px;
+    }
+    .ts-xs {
+        font-size: 11px;
+    }
+    
+}

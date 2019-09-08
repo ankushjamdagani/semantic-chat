@@ -1,0 +1,52 @@
+.btn {
+    display: inline-block;
+    border: solid 1px #000;
+    border-radius: 0;
+    padding: 5px 10px;
+    text-align: center;
+    cursor: pointer;
+    min-width: 120px;
+    &.btn-white {
+        border-color: #fff;
+        color: #fff;
+    }
+    &.btn-blue {
+        border-color: $primary;
+        color: $primary;
+    }
+    &.btn-yellow-filled {
+        border-color: transparent;
+        color: #000;
+        background: $secondary;
+        &.disabled {
+          background: #cdcdcd;
+          border: none;
+          pointer-events: none;
+        }
+    }
+
+    &.btn-grey-filled {
+        border-color: transparent;
+        color: #000;
+        background: #cdcdcd;
+        border: none;
+        &.disabled {
+          background: #cdcdcd;
+          border: none;
+          pointer-events: none;
+        }
+    }
+    &.btn-big {
+        padding: 15px 40px;
+    }
+    &.btn-block {
+        display: block;
+        padding: 15px 40px;
+    }
+}
+
+@media all and (max-width: 768px) {
+    .btn {
+        min-width: 65px;
+    }
+}

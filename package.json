@@ -1,0 +1,24 @@
+{
+  "name": "semantic-chat",
+  "version": "1.0.0",
+  "description": "Chat Application with realtime semantic analytics feedback",
+  "main": "server/index.js",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start",
+    "start": "concurrently \"yarn run server\" \"yarn run client\" "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ankushjamdagani/semantic-chat.git"
+  },
+  "author": "ankushjamdagani",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ankushjamdagani/semantic-chat/issues"
+  },
+  "homepage": "https://github.com/ankushjamdagani/semantic-chat#readme",
+  "dependencies": {
+    "concurrently": "^4.1.2"
+  }
+}

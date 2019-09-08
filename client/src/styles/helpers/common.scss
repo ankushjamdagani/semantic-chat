@@ -1,0 +1,25 @@
+/* ------ General -------- */
+.ibc {
+    font-size: 0;
+}
+
+.ibm {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.ibt {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.ibb {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.absolute-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
