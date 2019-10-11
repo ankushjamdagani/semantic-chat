@@ -10,9 +10,11 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx'],
         alias: {
-            COMPONENTS: path.resolve(__dirname, 'src/components/'),
-            IMAGES: path.resolve(__dirname, 'src/images/'),
-            STYLES: path.resolve(__dirname, 'src/styles/')
+            __COMPONENTS: path.resolve(__dirname, 'src/components/'),
+            __IMAGES: path.resolve(__dirname, 'src/images/'),
+            __STYLES: path.resolve(__dirname, 'src/styles/'),
+            __API: path.resolve(__dirname, 'src/api/'),
+            __CONSTANTS: path.resolve(__dirname, 'src/constants')
         }
     },
     module: {

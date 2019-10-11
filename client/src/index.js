@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Home from 'COMPONENTS/views/home'
+import { Home } from '__COMPONENTS/views'
 
-import 'STYLES/main.scss';
+import '__STYLES/main.scss';
 
 ReactDOM.render(
     <Home />,

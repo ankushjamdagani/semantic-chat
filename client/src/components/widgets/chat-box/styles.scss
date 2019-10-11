@@ -1,0 +1,35 @@
+.chat-box__container {
+    .chat-box__body {
+        
+    }
+    .chat-box__output {
+        height: calc(100vh - 58px);
+        overflow: auto;
+        padding: 4px;
+        .chat-item {
+            margin: 4px 0;
+            .chat-item__text {
+                font-size: 13px;
+                letter-spacing: .5px;
+                background: #f2fbff;
+                padding: 8px;
+                border-radius: 2px;
+                display: inline-block
+            }
+            .chat-item__timestamp {
+                font-size: 9px;
+                letter-spacing: .1px;
+                padding: 4px 0 8px;
+            }
+            &.chat-item--sent {
+                text-align: right;
+            }
+            &.chat-item--recieved {
+                text-align: left;
+            }
+        }
+    }
+    .chat-box__input {
+        height: 58px;
+    }
+}

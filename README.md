@@ -3,9 +3,15 @@
 Chat Application with realtime semantic analytics feedback
 ```
 
-### Modules
-`server`
-`client`
+### Module [ CLIENT ]
+* CSS Naming convention is BEM - 
+`Block-name__element-name--modiefier-name`
+
+#### TODO
+* Font classes
+* Color classes
+
+### Module [ SERVER ]
 
 ### TODO
 * Implement redux store
