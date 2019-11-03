@@ -4,8 +4,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: './src/index.js',
     output: {
+        // https://stackoverflow.com/questions/56573363/react-router-v4-nested-routes-not-work-with-webpack-dev-server
+        publicPath: '/',
         path: path.resolve(__dirname, 'dist'),
-        filename: 'bundle.js'
+        filename: 'index.min.js'
     },
     resolve: {
         extensions: ['.js', '.jsx'],
@@ -14,7 +16,9 @@ module.exports = {
             __IMAGES: path.resolve(__dirname, 'src/images/'),
             __STYLES: path.resolve(__dirname, 'src/styles/'),
             __API: path.resolve(__dirname, 'src/api/'),
-            __CONSTANTS: path.resolve(__dirname, 'src/constants')
+            __CONSTANTS: path.resolve(__dirname, 'src/constants/'),
+            __SERVICES: path.resolve(__dirname, 'src/services/'),
+            __ROUTES: path.resolve(__dirname, 'src/routes/')
         }
     },
     module: {
@@ -55,9 +59,8 @@ module.exports = {
         })
     ],
     devServer: {
-        contentBase: path.join(__dirname, 'dist'),
         compress: true,
-        port: 3000,
-        hot: true
+        // https://stackoverflow.com/questions/56573363/react-router-v4-nested-routes-not-work-with-webpack-dev-server
+        historyApiFallback: true
     }
 }

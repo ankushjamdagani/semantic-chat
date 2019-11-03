@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import { Home } from '__COMPONENTS/views'
+import Routes from '__ROUTES/';
 
 import '__STYLES/main.scss';
 
 ReactDOM.render(
-    <Home />,
+    <Routes />,
     document.getElementById('app-container')
 )

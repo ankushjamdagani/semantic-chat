@@ -1,13 +1,14 @@
 import React from 'react';
 
-import { onRecieveMessage, onSendMessage } from '__API/sockets';
+import { onRecieveMessage, onSendMessage, onSaveUserId } from '__API/sockets';
 
 import './styles.scss';
 
 class ChatBox extends React.Component {
     state = {
         messages: [],
-        activeMessage: ''
+        activeMessage: '',
+        userId: null
     }
     constructor(props) {
         super(props);
@@ -15,10 +16,12 @@ class ChatBox extends React.Component {
         this.onKeyDown = this.onKeyDown.bind(this);
         this.sendMessage = this.sendMessage.bind(this);
         this.recieveMessage = this.recieveMessage.bind(this);
+        this.saveUserId = this.saveUserId.bind(this);
         this.addMessageToList = this.addMessageToList.bind(this);
     }
     componentDidMount() {
         onRecieveMessage(this.recieveMessage)
+        onSaveUserId(this.saveUserId)
     }
     onMessageType(evt) {
         let value = evt.target.value;
@@ -34,7 +37,7 @@ class ChatBox extends React.Component {
             let messageData = {
                 text: this.state.activeMessage,
                 timestamp: Date.now(),
-                type: 'SENT'
+                userId: this.state.userId
             }
             this.setState({
                 activeMessage: ''
@@ -50,26 +53,37 @@ class ChatBox extends React.Component {
     recieveMessage(messageData) {
         messageData && this.addMessageToList(messageData);
     }
+    saveUserId(userId) {
+        if(userId) {
+            this.setState({
+                userId: userId
+            })
+        }
+    }
     addMessageToList(message) {
         this.setState({
             messages: this.state.messages.concat([message])
+        }, () => {
+            let height = this.chatBoxOutput.scrollHeight;
+            this.chatBoxOutput.scroll(0,height);
         })
     }
     render() {
         return (
             <div className="widget__container chat-box__container">
                 <div className="widget__body chat-box__body">
-                    <div className="chat-box__output">
+                    <div className="chat-box__output"
+                        ref={ref => this.chatBoxOutput = ref}
+                    >
                         <div className="clearfix chat-box__list">
                             {this.state.messages.map((msg, index) => {
                                 let messageSource = '';
                                 let date = new Date(msg.timestamp);
-                                if (msg.type == 'SENT') {
+                                if (msg.userId == this.state.userId) {
                                     messageSource = 'sent';
                                 } else {
                                     messageSource = 'recieve';
                                 }
-
                                 return (
                                     <div 
                                         className={`chat-item chat-item--${messageSource}`}
