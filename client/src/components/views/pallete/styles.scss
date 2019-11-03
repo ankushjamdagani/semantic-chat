@@ -1,0 +1,54 @@
+@import '__STYLES/helpers/variables';
+.pallete__container {
+    display: flex;
+    flex: 1;
+
+    [class^='pallete__item--'] {
+        height: 100vh;
+        flex: 1;
+        transition: all .5s ease-in-out;
+        &:hover {
+            flex: 2;
+        }
+    }
+
+    .palette__item__label {
+        background: rgba(0,0,0,.5);
+        padding: 10px 20px;
+        color: $White;
+        margin-top: 20px;
+        text-align: center;
+        box-shadow: 0 0 10px rgba(0,0,0,.25);
+    }
+
+    .pallete__item--1 {
+        background-color: $Black;
+    }
+    .pallete__item--2 {
+        background-color: $BlackForContrast;
+    }
+    .pallete__item--3 {
+        background-color: $DarkGrey;
+    }
+    .pallete__item--4 {
+        background-color: $Grey;
+    }
+    .pallete__item--5 {
+        background-color: $LightGrey;
+    }
+    .pallete__item--6 {
+        background-color: $Whitish;
+    }
+    .pallete__item--7 {
+        background-color: $White;
+    }
+    .pallete__item--8 {
+        background-color: $Red;
+    }
+    .pallete__item--9 {
+        background-color: $Silver;
+    }
+    .pallete__item--10 {
+        background-color: $Gold;
+    }
+}

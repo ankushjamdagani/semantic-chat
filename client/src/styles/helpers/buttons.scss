@@ -10,14 +10,10 @@
         border-color: #fff;
         color: #fff;
     }
-    &.btn-blue {
-        border-color: $primary;
-        color: $primary;
-    }
-    &.btn-yellow-filled {
+    &.btn-dark-grey-filled {
         border-color: transparent;
         color: #000;
-        background: $secondary;
+        background: $DarkGrey;
         &.disabled {
           background: #cdcdcd;
           border: none;

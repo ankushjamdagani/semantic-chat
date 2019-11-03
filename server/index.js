@@ -28,7 +28,7 @@ io.on("connection", (socket) => {
 
     socket.on('disconnect', function() {
       delete USERS_MAP[socket.id];
-      console.log('---- socket is disconnected', USERS_MAP);
+      console.log('---- socket is disconnected', socket.id);
     })
 
     socket.on('message', function(message) {
