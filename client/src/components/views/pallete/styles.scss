@@ -1,10 +1,6 @@
 @import '__STYLES/helpers/variables';
 .pallete__container {
-    display: flex;
-    flex: 1;
-
     [class^='pallete__item--'] {
-        height: 100vh;
         flex: 1;
         transition: all .5s ease-in-out;
         &:hover {

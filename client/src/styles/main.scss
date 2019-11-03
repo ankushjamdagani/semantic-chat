@@ -47,6 +47,13 @@ a {
     color: #a7a9ac;
 }
 
+.view__container, .view__container--inner {
+    display: flex;
+    flex: 1;
+    height: 100vh;
+    position: relative;
+}
+
 .widget__container {
     position: relative;
 }
