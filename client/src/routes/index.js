@@ -8,7 +8,8 @@ import {
 import { 
     Home, 
     Login ,
-    Pallete
+    Pallete,
+    ReadMe
 } from '__COMPONENTS/views';
 import PrivateRoute from './privateRoute';
 
@@ -18,6 +19,7 @@ const Routes = () => {
             <Switch>
                 <Route exact path='/login' component={Login}/>
                 <Route exact path='/pallete' component={Pallete}/>
+                <Route exact path='/readme' component={ReadMe}/>
                 {/* Write all private components inside PrivateRoute */}
                 <PrivateRoute>
                     <Route path='/' component={Home}/>

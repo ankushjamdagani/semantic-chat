@@ -10,12 +10,6 @@ Chat Application with realtime semantic analytics feedback
 ### Module [ SERVER ]
 
 
-***
-1. Routing (Public, Private, Auth, Redirection, Referer)
-2. Context/
-3. Authentication - Login, Signup
-***
-
 ## Focus Points
 * UX
     * Create Wireframe
