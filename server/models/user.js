@@ -146,6 +146,28 @@ UserSchema.methods.doesPhoneOrEmailExist = function(cb) {
     })
 }
 
+UserSchema.methods.validPassword = function(password, cb) {
+  bcrypt.compare(password, this.password, (err, isMatch) => {
+    if(err) throw err;
+
+    cb(isMatch);
+  })
+}
+
+UserSchema.methods.getUserFromEmail = function(email, cb) {
+  this.model('User')
+    .findOne({
+      email: email
+    })
+    .then(function(user){
+      if(!user){
+        return cb(false, 'email is invalid');
+      }
+      return cb(user);
+    })
+    .catch(done);
+}
+
 UserSchema.methods.addUser = function(errorCallback, successCallback) {
   const newUser = new UserModel({
     username,

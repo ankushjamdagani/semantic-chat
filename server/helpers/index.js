@@ -24,7 +24,15 @@ const constructResponse = (code, message, data) => {
   }
 }
 
+const isAuthenticated = (req, res, next) => {
+  if(req.isAuthenticated()) {
+    next();
+  }
+  res.redirect('/login')
+}
+
 module.exports = {
   hashPassword,
-  constructResponse
+  constructResponse,
+  isAuthenticated
 }

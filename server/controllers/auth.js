@@ -1,25 +1,34 @@
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 const {
   constructResponse
 } = require('../helpers');
 
-const { UserModel } = require('../models');
+const { 
+  UserModel 
+} = require('../models');
 
 router.get('/', function (req, res) {
   res.status(200).send({
     code: 200,
-    message: 'API works.'
+    message: 'Auth API works.'
   });
 });
 
-router.post('/login', (req, res) => {
-  res.send('Todo');
-});
+router.post('/login', 
+  passport.authenticate('local'), 
+  (req, res) => {
+    res.send({
+      message: 'logged in'
+    })
+  }
+);
 
 router.post('/logout', (req, res) => {
-  res.send('Todo');
+  req.logOut();
+  res.redirect('/login');
 });
 
 router.post('/register', (req, res) => {
@@ -71,7 +80,7 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/forgot_password', (req, res) => {
-  res.send('Todo');
+  res.send(req.isAuthenticated());
 });
 
 module.exports = router;
