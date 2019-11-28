@@ -131,6 +131,21 @@ UserSchema.methods.doesPhoneExist = function(cb) {
     })
 };
 
+UserSchema.methods.doesPhoneOrEmailExist = function(cb) {
+  this.model('User')
+    .find()
+    .or([
+      {email: this.email},
+      {phone: this.phone}
+    ])
+    .then(function(res) {
+      cb && cb(res.length === 0)
+    })
+    .catch(function(err) {
+      cb && cb(false, err);
+    })
+}
+
 UserSchema.methods.addUser = function(errorCallback, successCallback) {
   const newUser = new UserModel({
     username,
@@ -163,19 +178,6 @@ UserSchema.methods.addUser = function(errorCallback, successCallback) {
     }
   });
 }
-// UserSchema.methods.canAddUser = function(cb) {
-//   this.model('User')
-//     .find()
-//     .or([
-//       {email: this.email},
-//       {phone: this.phone}
-//     ])
-//     .then(function(res) {
-//       cb && cb(res.length === 0)
-//     })
-//     .catch(function(err) {
-//       cb && cb(false, err);
-//     })
-// }
+
 const UserModel = mongoose.model('User', UserSchema);
 module.exports = UserModel;

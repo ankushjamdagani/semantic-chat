@@ -15,11 +15,11 @@ router.get('/', function (req, res) {
 });
 
 router.post('/login', (req, res) => {
-
+  res.send('Todo');
 });
 
 router.post('/logout', (req, res) => {
-
+  res.send('Todo');
 });
 
 router.post('/register', (req, res) => {
@@ -71,7 +71,7 @@ router.post('/register', (req, res) => {
 });
 
 router.post('/forgot_password', (req, res) => {
-
+  res.send('Todo');
 });
 
 module.exports = router;

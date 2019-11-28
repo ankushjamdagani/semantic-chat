@@ -12,22 +12,22 @@ router.get('/', function (req, res) {
 
 // Create a message
 router.post('/', (req, res) => {
-
+  res.send('Todo');
 })
 
 // Get a message
 router.get('/:id', (req, res) => {
-
+  res.send('Todo');
 })
 
 // Delete a message
 router.delete('/:id', (req, res) => {
-
+  res.send('Todo');
 })
 
 // Update a message
 router.put('/:id', (req, res) => {
-
+  res.send('Todo');
 })
 
 module.exports = router;
