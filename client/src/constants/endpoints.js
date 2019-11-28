@@ -1,5 +1,5 @@
-const ENDPOINT_SOCKET = 'http://localhost:8000';
+const CHAT_SOCKET = 'http://localhost:8000/chat';
 
 export {
-    ENDPOINT_SOCKET
+    CHAT_SOCKET
 }

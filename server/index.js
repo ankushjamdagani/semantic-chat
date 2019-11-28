@@ -1,42 +1,17 @@
 const express = require('express');
-const app = express();
-const server = require('http').createServer(app);
-const io = require('socket.io').listen(server);
-
-app.get('/api/customers', (req, res) => {
-  const customers = [
-    { id: 1, firstName: 'John', lastName: 'Doe' },
-    { id: 2, firstName: 'Brad', lastName: 'Traversy' },
-    { id: 3, firstName: 'Mary', lastName: 'Swanson' },
-  ];
-  res.json(customers);
-});
+const http = require('http');
+const socket = require('socket.io');
 
 const PORT = process.env.PORT || 8000;
 
+const app = express();
+const server = http.createServer(app);
+const io = socket.listen(server);
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
-const USERS_MAP = {}
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.set('socketIo', io);
 
-io.on("connection", (socket) => {
-  console.log('---- socket is connected');
-
-  const ID = socket.id;
-  USERS_MAP[ID] = socket;
-
-  socket.emit('save_user_id', ID)
-
-  socket.on('disconnect', function () {
-    delete USERS_MAP[socket.id];
-    console.log('---- socket is disconnected', socket.id);
-  })
-
-  socket.on('message', function (message) {
-    console.log('message ------ ' + message.text);
-    for (let userId in USERS_MAP) {
-      if (userId !== message.userId) {
-        USERS_MAP[userId].emit('message', message);
-      }
-    }
-  })
-})
+require('./database');
+require('./controllers')(app);
