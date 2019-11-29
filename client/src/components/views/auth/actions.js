@@ -1,6 +1,6 @@
 import {
   Endpoints
-} from '__constants/endpoints';
+} from '__CONSTANTS/endpoints';
 
 import {
   AUTH__CHANGE_VIEW,
