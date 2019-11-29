@@ -3,31 +3,30 @@ const router = express.Router();
 
 const { MessageModel } = require('../models');
 
-router.get('/', function (req, res) {
-  res.status(200).send({
-    code: 200,
-    message: 'API works.'
-  });
-});
+const {
+  constructResponse
+} = require('../helpers');
+
+router.get('/', res => res.status(200).send(constructResponse(200, 'SUCCESS', 'Auth API works.')));
 
 // Create a message
 router.post('/', (req, res) => {
-  res.send('Todo');
+  res.status(200).send(constructResponse(200, 'SUCCESS', 'TODO'));
 })
 
 // Get a message
 router.get('/:id', (req, res) => {
-  res.send('Todo');
+  res.status(200).send(constructResponse(200, 'SUCCESS', 'TODO'));
 })
 
 // Delete a message
 router.delete('/:id', (req, res) => {
-  res.send('Todo');
+  res.status(200).send(constructResponse(200, 'SUCCESS', 'TODO'));
 })
 
 // Update a message
 router.put('/:id', (req, res) => {
-  res.send('Todo');
+  res.status(200).send(constructResponse(200, 'SUCCESS', 'TODO'));
 })
 
 module.exports = router;

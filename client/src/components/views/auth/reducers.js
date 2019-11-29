@@ -20,7 +20,7 @@ const INITIAL_STATE = {
   data: null,
 };
 
-const loginReducer = (state = INITIAL_STATE, action) => {
+const authReducer = (state = INITIAL_STATE, action) => {
   switch(action.type) {
     case AUTH__CHANGE_VIEW: {
       return {
@@ -123,4 +123,4 @@ const loginReducer = (state = INITIAL_STATE, action) => {
   }
 }
 
-export default loginReducer;
+export default authReducer;

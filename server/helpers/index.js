@@ -6,19 +6,18 @@ const hashPassword = (password, callback) => {
   )
 }
 
-const constructResponse = (code, message, data) => {
-  const codeRange = code / 100;
-  if(codeRange >= 2 && codeRange < 3) {
+const constructResponse = (code, status, data) => {
+  if(status === 'SUCCESS') {
     return {
       code,
-      message,
+      status,
       data
     }
   }
   else {
     return {
       code,
-      message,
+      status,
       error: data
     }
   }

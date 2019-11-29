@@ -6,23 +6,37 @@ const {
   constructResponse
 } = require('../helpers');
 
-const { 
-  UserModel 
+const {
+  UserModel
 } = require('../models');
 
 router.get('/', function (req, res) {
-  res.status(200).send({
-    code: 200,
-    message: 'Auth API works.'
-  });
+  res.status(200).send(constructResponse(200, 'SUCCESS', 'Auth API works.'));
 });
 
-router.post('/login', 
-  passport.authenticate('local'), 
-  (req, res) => {
-    res.send({
-      message: 'logged in'
-    })
+router.post('/login',
+  function (req, res, next) {
+    passport.authenticate('local', function (err, user) {
+      if (err) { return next(err) }
+      if (!user) {
+        return res.status(401).send(constructResponse(401, 'ERROR', 'Invalid username or password'));
+      }
+
+      req.login(user, {}, function (err) {
+        if (err) { return next(err) };
+        const user = {
+          _id: req.user._id,
+          isActive: req.user.isActive,
+          username: req.user.username,
+          email: req.user.email,
+          phone: req.user.phone,
+          created_at: req.user.created_at,
+          last_seen: req.user.last_seen
+        }
+        return res.status(200).send(constructResponse(200, 'SUCCESS', user));
+      });
+    })(req, res, next);
+    return;
   }
 );
 
@@ -46,18 +60,18 @@ router.post('/register', (req, res) => {
     phone
   })
 
-  newUser.doesEmailExist(function(emailExist) {
-    if(emailExist) {
+  newUser.doesEmailExist(function (emailExist) {
+    if (emailExist) {
       res
         .status(400)
-        .send(constructResponse(400, 'Email already exist!'));
+        .send(constructResponse(400, 'ERROR', 'Email already exist!'));
     }
     else {
-      newUser.doesPhoneExist(function(phoneExist) {
-        if(phoneExist) {
+      newUser.doesPhoneExist(function (phoneExist) {
+        if (phoneExist) {
           res
             .status(400)
-            .send(constructResponse(400, 'Phone already exist!'));
+            .send(constructResponse(400, 'ERROR', 'Phone already exist!'));
         }
         else {
           newUser
@@ -65,12 +79,12 @@ router.post('/register', (req, res) => {
             .then(user => {
               res
                 .status(200)
-                .send(constructResponse(200, 'User registered successfully!', {id: user._id}));
+                .send(constructResponse(200, 'SUCCESS'));
             })
             .catch(err => {
               res
                 .status(400)
-                .send(constructResponse(400, 'User registration failed!', {err,data: req.body}));
+                .send(constructResponse(400, 'ERROR', { err, message: 'User registering failed! Please try again after some time!' }));
             });
         }
       })

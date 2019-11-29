@@ -4,13 +4,12 @@ function initExpressController (app) {
   const UserController = require('./user');
   const MessageController = require('./message');
 
+  const {
+    constructResponse
+  } = require('../helpers');
+
   // Declare express routes
-  app.get('/api', function (req, res) {
-    res.status(200).send({
-      code:200,
-      message: 'API works.'
-    });
-  });
+  app.get('/api', (req, res) => res.status(200).send(constructResponse(200, 'SUCCESS', 'API works.')));
   app.use('/api/v1/auth', AuthController);
   app.use('/api/v1/user', UserController);
   app.use('/api/v1/message', MessageController);

@@ -2,6 +2,7 @@ const express = require('express');
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const cookieParser = require('cookie-parser')
+const cors = require('cors');
 const http = require('http');
 const socket = require('socket.io');
 const passport = require('passport');
@@ -22,6 +23,8 @@ app.use(session({
   resave: true
 }));
 app.use(cookieParser())
+// app.use(cors())
+app.use(cors({credentials: true, origin: 'http://localhost:8080'}));
 
 // form-body parser
 app.use(bodyParser.urlencoded({ extended: false }));

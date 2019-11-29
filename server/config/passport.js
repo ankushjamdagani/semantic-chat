@@ -28,9 +28,7 @@ const initPassport = function(passport) {
   });
   
   passport.deserializeUser(function(id, done) {
-    UserModel.findById(id, function(err, user) {
-      done(err, user);
-    });
+    UserModel.findById(id, done);
   });
 }
 
