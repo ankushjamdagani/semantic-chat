@@ -3,6 +3,10 @@ import {
 } from '__CONSTANTS/endpoints';
 
 import {
+  setUserData
+} from '__SERVICES/auth';
+
+import {
   AUTH__CHANGE_VIEW,
   AUTH__LOG_IN__PROGRESS,
   AUTH__LOG_IN__SUCCESS,
@@ -32,6 +36,7 @@ const loginProgress = (data) => {
 }
 const loginComplete = (data) => {
   // Redirect to dashboard
+  setUserData(data);
   return {
     type: AUTH__LOG_IN__SUCCESS,
     payload: data

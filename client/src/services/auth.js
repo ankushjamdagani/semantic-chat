@@ -1,18 +1,17 @@
-import {
-  getCookie
-} from './cookies';
-
 export const isUserLoggedIn = () => {
-  const authToken = getCookie('auth_token');
-  return !!authToken;
+  const userData = getUserData();
+  return !!userData;
 }
 
 export const getUserData = () => {
-  const isUserLoggedIn = isUserLoggedIn();
-  if (isUserLoggedIn) {
-    return localStorage.getItem('user_data');
+  try {
+    return JSON.parse(localStorage.getItem('user_data'));  
   }
-  else {
-    return null
+  catch(e) {
+    return false;
   }
+}
+
+export const setUserData = (data) => {
+  localStorage.setItem('user_data', JSON.stringify(data));
 }

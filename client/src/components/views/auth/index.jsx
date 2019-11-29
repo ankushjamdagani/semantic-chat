@@ -14,7 +14,7 @@ import {
 
 class Auth extends React.Component {
   login() {
-    this.props.tryLoggingIn({ email: 'anqush.jamdagasni@gmail.com', password: 'ankush' })
+    this.props.tryLoggingIn({ email: 'anqush.jamdagani@gmail.com', password: 'ankush' })
   }
   render() {
     const { activeView } = this.props;
