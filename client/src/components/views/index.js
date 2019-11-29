@@ -1,11 +1,11 @@
 import Home from './home';
-import Login from './login';
+import Auth from './auth';
 import Pallete from './pallete';
 import ReadMe from './readMe';
 
 export {
     Home,
-    Login,
+    Auth,
     Pallete,
     ReadMe
 }

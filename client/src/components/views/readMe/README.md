@@ -20,7 +20,7 @@ Chat Application with realtime semantic analytics feedback
 
 
 ### Comming up
-* Complete user onboarding - Login Screen
+* Complete user onboarding - Auth Screen
 * Code Utils
     * Finalize conventions (element class, font class, color class,etc)
     * React Router + Redux + Saga

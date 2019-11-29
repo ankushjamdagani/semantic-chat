@@ -1,8 +1,10 @@
 import openSocket from 'socket.io-client';
 
-import { CHAT_SOCKET } from '__CONSTANTS/endpoints';
+import {
+  Endpoints
+} from '__CONSTANTS/endpoints';
 
-const socket = openSocket(CHAT_SOCKET);
+const socket = openSocket(Endpoints.CHAT_URL);
 
 function onRecieveMessage(cb) {
   socket.on('message', message => cb(message));

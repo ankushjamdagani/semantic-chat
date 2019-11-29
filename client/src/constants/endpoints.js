@@ -1,5 +1,11 @@
-const CHAT_SOCKET = 'http://localhost:8000/chat';
+const BASE_URL = 'http://localhost:8000/';
+const Endpoints = {
+    AUTH_URL: BASE_URL + 'auth/',
+    CHAT_URL: BASE_URL + 'chat/',
+    MESSAGE_URL: BASE_URL + 'message/'
+}
 
 export {
-    CHAT_SOCKET
-}
+  Endpoints,
+  BASE_URL
+};
