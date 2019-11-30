@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
-import "./styles.scss";
 import {
   changeActiveView,
   tryRegisteringIn,
@@ -13,15 +12,31 @@ import {
 
 import { LoginForm } from "__COMPONENTS/widgets";
 
-class Auth extends React.Component {
-  constructor(props) {
-    super(props);
+import { isUserLoggedIn } from "__SERVICES/auth";
 
-    this.login = this.login.bind(this);
+import "./styles.scss";
+
+const AUTH_VIEWS = {
+  LOGIN_VIEW: 0,
+  REGISTER_VIEW: 1,
+  FORGOT_VIEW: 2
+}
+class Auth extends React.Component {
+
+  componentDidMount() {
+    this.redirectIfLoggedIn()
   }
-  login(formData) {
-    this.props.tryLoggingIn(formData);
+  
+  componentDidUpdate() {
+    this.redirectIfLoggedIn()
   }
+
+  redirectIfLoggedIn = () => {
+    if(isUserLoggedIn()) {
+      window.location.href = '/';
+    }
+  }
+
   render() {
     const { activeView, status, data } = this.props;
     return (
@@ -35,7 +50,7 @@ class Auth extends React.Component {
                   <LoginForm 
                     status={status}
                     submissionData={data}
-                    onSubmit={this.login} 
+                    onSubmit={this.props.tryLoggingIn} 
                   />
                 );
             }

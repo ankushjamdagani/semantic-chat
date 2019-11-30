@@ -1,5 +1,4 @@
 import { Endpoints } from "__CONSTANTS";
-
 import { setUserData } from "__SERVICES/auth";
 
 import {
@@ -31,7 +30,6 @@ const loginProgress = data => {
   };
 };
 const loginComplete = data => {
-  // Redirect to dashboard
   setUserData(data);
   return {
     type: AUTH__LOG_IN__SUCCESS,
