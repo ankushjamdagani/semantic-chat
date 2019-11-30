@@ -1,0 +1,45 @@
+@import "__STYLES/helpers/variables.scss";
+
+.form-group {
+  margin-bottom: 16px;
+  position: relative;
+  input {
+    margin: 8px 0 0 0;
+  }
+  .form-control {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-bottom: solid 1px #bfbebf;
+    color: $primary;
+    outline: none;
+    transition: background 0.25s ease-in-out;
+    background: #deeefb;
+    &::placeholder {
+      color: #333;
+    }
+    &:hover {
+      background: #e6f1fb;
+    }
+    &:focus {
+      background: white;
+    }
+  }
+
+  .control-error {
+    border-bottom: solid 1px red;
+  }
+  [disabled] {
+    cursor: not-allowed;
+    background: #f0f0f0;
+  }
+  &.prefixed-control {
+    .prefix-input {
+      position: absolute;
+      bottom: 20px;
+    }
+    .form-control {
+      padding-left: 50px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
-import React from 'react';
-import * as mdFile from './README.md';
-import './styles.scss';
+import React from "react";
+import * as mdFile from "./README.md";
+import "./styles.scss";
 
 class ReadMe extends React.Component {
   render() {
@@ -10,7 +10,7 @@ class ReadMe extends React.Component {
           <div dangerouslySetInnerHTML={{ __html: mdFile }}></div>
         </div>
       </div>
-    )
+    );
   }
 }
 

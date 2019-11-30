@@ -12,115 +12,115 @@ import {
   AUTH__FORGOT_PASSWORD__PROGRESS,
   AUTH__FORGOT_PASSWORD__SUCCESS,
   AUTH__FORGOT_PASSWORD__ERROR
-} from './action-types';
+} from "./action-types";
 
 const INITIAL_STATE = {
-  activeView: 'LOG_IN',
+  activeView: "LOG_IN",
   status: null,
-  data: null,
+  data: null
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case AUTH__CHANGE_VIEW: {
       return {
         ...state,
         activeView: action.payload,
         data: null
-      }
+      };
     }
 
     case AUTH__LOG_IN__PROGRESS: {
       return {
         ...state,
-        status: 'loading',
+        status: "loading",
         data: null
-      }
+      };
     }
     case AUTH__LOG_IN__SUCCESS: {
       return {
         ...state,
-        status: 'success',
+        status: "success",
         data: action.payload
-      }
+      };
     }
     case AUTH__LOG_IN__ERROR: {
       return {
         ...state,
-        status: 'error',
+        status: "error",
         data: action.payload
-      }
+      };
     }
 
     case AUTH__REGISTER__PROGRESS: {
       return {
         ...state,
-        status: 'loading',
+        status: "loading",
         data: null
-      }
+      };
     }
     case AUTH__REGISTER__SUCCESS: {
       return {
         ...state,
-        status: 'success',
+        status: "success",
         data: action.payload
-      }
+      };
     }
     case AUTH__REGISTER__ERROR: {
       return {
         ...state,
-        status: 'error',
+        status: "error",
         data: action.payload
-      }
+      };
     }
 
     case AUTH__LOG_OUT__PROGRESS: {
       return {
         ...state,
-        status: 'loading',
+        status: "loading",
         data: null
-      }
+      };
     }
     case AUTH__LOG_OUT__SUCCESS: {
       return {
         ...state,
-        status: 'success',
+        status: "success",
         data: action.payload
-      }
+      };
     }
     case AUTH__LOG_OUT__ERROR: {
       return {
         ...state,
-        status: 'error',
+        status: "error",
         data: action.payload
-      }
+      };
     }
 
     case AUTH__FORGOT_PASSWORD__PROGRESS: {
       return {
         ...state,
-        status: 'loading',
+        status: "loading",
         data: null
-      }
+      };
     }
     case AUTH__FORGOT_PASSWORD__SUCCESS: {
       return {
         ...state,
-        status: 'success',
+        status: "success",
         data: action.payload
-      }
+      };
     }
     case AUTH__FORGOT_PASSWORD__ERROR: {
       return {
         ...state,
-        status: 'error',
+        status: "error",
         data: action.payload
-      }
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};
 
 export default authReducer;

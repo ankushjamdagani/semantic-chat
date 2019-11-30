@@ -1,20 +1,26 @@
-import React from 'react';
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-  ;
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import './styles.scss';
+import "./styles.scss";
 import {
   changeActiveView,
   tryRegisteringIn,
   tryLoggingIn,
   tryLoggingOut,
   tryForgotPassword
-} from './actions';
+} from "./actions";
+
+import { LoginForm } from "__COMPONENTS/widgets";
 
 class Auth extends React.Component {
-  login() {
-    this.props.tryLoggingIn({ email: 'anqush.jamdagani@gmail.com', password: 'ankush' })
+  constructor(props) {
+    super(props);
+
+    this.login = this.login.bind(this);
+  }
+  login(formData) {
+    this.props.tryLoggingIn(formData);
   }
   render() {
     const { activeView } = this.props;
@@ -22,23 +28,19 @@ class Auth extends React.Component {
       <div className="view__container auth__container">
         <div className="view__container--inner auth__inner-container">
           <div className="absolute-center">
-            <button
-              onClick={this.login.bind(this)}
-            >{activeView}</button>
-
-            Please auth
+            <LoginForm onSubmit={this.login} />
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
   return {
     ...state.auth
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
@@ -47,10 +49,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     tryRegisteringIn: bindActionCreators(tryRegisteringIn, dispatch),
     tryLoggingOut: bindActionCreators(tryLoggingOut, dispatch),
     tryForgotPassword: bindActionCreators(tryForgotPassword, dispatch)
-  }
-}
+  };
+};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

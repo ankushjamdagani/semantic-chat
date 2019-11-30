@@ -1,0 +1,28 @@
+.form-group-radio {
+    .form-control-label {
+      margin-bottom: 10px;
+    }
+
+    .form-group-item {
+        display: inline-block;
+        align-items: center;
+        margin-right: 20px;
+        input {
+            margin-right: 10px;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .form-group-radio {
+        .form-control-label {
+            width: 100%;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .form-group-item {
+            margin: 0 20px 0 0;
+        }
+    }
+}

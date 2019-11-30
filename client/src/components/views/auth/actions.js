@@ -1,10 +1,6 @@
-import {
-  Endpoints
-} from '__CONSTANTS/endpoints';
+import { Endpoints } from "__CONSTANTS/endpoints";
 
-import {
-  setUserData
-} from '__SERVICES/auth';
+import { setUserData } from "__SERVICES/auth";
 
 import {
   AUTH__CHANGE_VIEW,
@@ -20,170 +16,169 @@ import {
   AUTH__FORGOT_PASSWORD__PROGRESS,
   AUTH__FORGOT_PASSWORD__SUCCESS,
   AUTH__FORGOT_PASSWORD__ERROR
-} from './action-types';
+} from "./action-types";
 
-export const changeActiveView = (data) => {
+export const changeActiveView = data => {
   return {
     type: AUTH__CHANGE_VIEW,
     payload: data
-  }
-}
+  };
+};
 
-const loginProgress = (data) => {
+const loginProgress = data => {
   return {
     type: AUTH__LOG_IN__PROGRESS
-  }
-}
-const loginComplete = (data) => {
+  };
+};
+const loginComplete = data => {
   // Redirect to dashboard
   setUserData(data);
   return {
     type: AUTH__LOG_IN__SUCCESS,
     payload: data
-  }
-}
-const loginError = (data) => {
+  };
+};
+const loginError = data => {
   return {
     type: AUTH__LOG_IN__ERROR,
     payload: data
-  }
-}
+  };
+};
 
-export const tryLoggingIn = (data) => {
-  return (dispatch) => {
+export const tryLoggingIn = data => {
+  return dispatch => {
     dispatch(loginProgress());
-    fetch(Endpoints.AUTH_URL + 'login', {
-      method: 'POST',
+    fetch(Endpoints.AUTH_URL + "login", {
+      method: "POST",
       // credentials: 'same-origin',
-      credentials: 'include',
+      credentials: "include",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(res => {
-      const isSuccess = res && res.status && res.status === 'SUCCESS';
-      if(isSuccess) {
-        dispatch(loginComplete(res.data))
-      }
-      else {
-        dispatch(loginError(res.error))
-      }
-    })
-    .catch(err => {
-      dispatch(loginError(err.message || err))
-    })
+      .then(res => res.json())
+      .then(res => {
+        const isSuccess = res && res.status && res.status === "SUCCESS";
+        if (isSuccess) {
+          dispatch(loginComplete(res.data));
+        } else {
+          dispatch(loginError(res.error));
+        }
+      })
+      .catch(err => {
+        dispatch(loginError(err.message || err));
+      });
   };
-}
+};
 
-const registerProgress = (data) => {
+const registerProgress = data => {
   return {
     type: AUTH__REGISTER__PROGRESS,
     payload: data
-  }
-}
-const registerComplete = (data) => {
+  };
+};
+const registerComplete = data => {
   // Redirect to dashboard
   return {
     type: AUTH__REGISTER__SUCCESS,
     payload: data
-  }
-}
-const registerError = (data) => {
+  };
+};
+const registerError = data => {
   return {
     type: AUTH__REGISTER__ERROR,
     payload: data
-  }
-}
+  };
+};
 
-export const tryRegisteringIn = (data) => {
-  return (dispatch) => {
+export const tryRegisteringIn = data => {
+  return dispatch => {
     dispatch(registerProgress());
-    fetch(Endpoints.AUTH_URL + 'register', {
-      method: 'POST',
-      credentials: 'same-origin',
+    fetch(Endpoints.AUTH_URL + "register", {
+      method: "POST",
+      credentials: "same-origin",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(res => dispatch(registerComplete(res.data)))
-    .catch(err => dispatch(registerError(err)))
+      .then(res => res.json())
+      .then(res => dispatch(registerComplete(res.data)))
+      .catch(err => dispatch(registerError(err)));
   };
-}
+};
 
-const logoutProgress = (data) => {
+const logoutProgress = data => {
   return {
     type: AUTH__LOG_OUT__PROGRESS,
     payload: data
-  }
-}
-const logoutComplete = (data) => {
+  };
+};
+const logoutComplete = data => {
   // Redirect to login
   return {
     type: AUTH__LOG_OUT__SUCCESS,
     payload: data
-  }
-}
-const logoutError = (data) => {
+  };
+};
+const logoutError = data => {
   return {
     type: AUTH__LOG_OUT__ERROR,
     payload: data
-  }
-}
+  };
+};
 
-export const tryLoggingOut = (data) => {
-  return (dispatch) => {
+export const tryLoggingOut = data => {
+  return dispatch => {
     dispatch(logoutProgress());
-    fetch(Endpoints.AUTH_URL + 'register', {
-      method: 'POST',
-      credentials: 'same-origin',
+    fetch(Endpoints.AUTH_URL + "register", {
+      method: "POST",
+      credentials: "same-origin",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(res => dispatch(logoutComplete(res.data)))
-    .catch(err => dispatch(logoutError(err)))
+      .then(res => res.json())
+      .then(res => dispatch(logoutComplete(res.data)))
+      .catch(err => dispatch(logoutError(err)));
   };
-}
+};
 
-const forgotPasswordProgress = (data) => {
+const forgotPasswordProgress = data => {
   return {
     type: AUTH__FORGOT_PASSWORD__PROGRESS,
     payload: data
-  }
-}
-const forgotPasswordComplete = (data) => {
+  };
+};
+const forgotPasswordComplete = data => {
   // Redirect to login
   return {
     type: AUTH__FORGOT_PASSWORD__SUCCESS,
     payload: data
-  }
-}
-const forgotPasswordError = (data) => {
+  };
+};
+const forgotPasswordError = data => {
   return {
     type: AUTH__FORGOT_PASSWORD__ERROR,
     payload: data
-  }
-}
+  };
+};
 
-export const tryForgotPassword = (data) => {
-  return (dispatch) => {
+export const tryForgotPassword = data => {
+  return dispatch => {
     dispatch(forgotPasswordProgress());
-    fetch(Endpoints.AUTH_URL + 'register', {
-      method: 'POST',
-      credentials: 'same-origin',
+    fetch(Endpoints.AUTH_URL + "register", {
+      method: "POST",
+      credentials: "same-origin",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     })
-    .then(res => res.json())
-    .then(res => dispatch(forgotPasswordComplete(res.data)))
-    .catch(err => dispatch(forgotPasswordError(err)))
+      .then(res => res.json())
+      .then(res => dispatch(forgotPasswordComplete(res.data)))
+      .catch(err => dispatch(forgotPasswordError(err)));
   };
-}
+};

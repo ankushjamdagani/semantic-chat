@@ -1,2 +1,2 @@
-export * from './sockets';
-export * from './ajax';
+export * from "./sockets";
+export * from "./ajax";

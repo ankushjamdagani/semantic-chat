@@ -1,64 +1,70 @@
-@import url('https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css');
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900&display=swap');
-@import './helpers/reset.scss';
-@import './helpers/fonts.scss';
-@import './helpers/icons.scss';
-@import './helpers/variables.scss';
-@import './helpers/text.scss';
-@import './helpers/buttons.scss';
-@import './helpers/inputs.scss';
-@import './helpers/common.scss';
-
+@import url("https://cdnjs.cloudflare.com/ajax/libs/flexboxgrid/6.3.1/flexboxgrid.min.css");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900&display=swap");
+@import "./helpers/reset.scss";
+@import "./helpers/fonts.scss";
+@import "./helpers/icons.scss";
+@import "./helpers/variables.scss";
+@import "./helpers/text.scss";
+@import "./helpers/buttons.scss";
+@import "./helpers/common.scss";
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-body{
-    font-family: 'Roboto', sans-serif;
+body {
+  font-family: "Roboto", sans-serif;
 }
 
-html, body {
-    height: 100%;
-    background: #fff;
-    color: #333;
-    scroll-behavior: smooth;
+html,
+body {
+  height: 100%;
+  background: #fff;
+  color: #333;
+  scroll-behavior: smooth;
 }
 
 a {
+  color: #333;
+  text-decoration: none;
+  &:hover,
+  &:focus,
+  &:visited,
+  &:active {
     color: #333;
-    text-decoration: none;
-    &:hover, &:focus, &:visited, &:active {
-        color: #333;
-    }
+  }
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #a7a9ac;
-    opacity: 1; /* Firefox */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #a7a9ac;
+  opacity: 1; /* Firefox */
 }
 
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #a7a9ac;
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: #a7a9ac;
 }
 
-::-ms-input-placeholder { /* Microsoft Edge */
-    color: #a7a9ac;
+::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: #a7a9ac;
 }
 
-.view__container, .view__container--inner {
-    display: flex;
-    flex: 1;
-    height: 100vh;
-    position: relative;
+.view__container,
+.view__container--inner {
+  display: flex;
+  flex: 1;
+  height: 100vh;
+  position: relative;
 }
 
 .widget__container {
-    position: relative;
+  position: relative;
 }
 
 .clearfix:after {
-    content: '';
-    display: block;
-    clear: both;
+  content: "";
+  display: block;
+  clear: both;
 }

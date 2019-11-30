@@ -1,0 +1,12 @@
+.login-form-component {
+  .login-form-inputs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+}
