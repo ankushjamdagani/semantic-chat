@@ -1,9 +1,22 @@
 @import "__STYLES/helpers/variables";
 .login-form__container {
+  &:after {
+    content: '';
+    position: absolute;
+    background: $Color0Alpha;
+    right: 35px;
+    top: 35px;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    border-radius: 5px;
+  }
+  
   .login-form__body {
     padding: 60px;
     border-radius: 5px;
     background: $Grey5;
+    z-index: 1;
   }
   .login-form__inputs {
     display: flex;

@@ -10,6 +10,7 @@ import { EmailInput, PasswordInput, Validator } from "__COMPONENTS/shared/";
 export default class LoginForm extends Component {
   state = {
     formIsValid: false,
+    formTouched: false,
     formControls: {
       email: {
         value: "",
@@ -61,7 +62,8 @@ export default class LoginForm extends Component {
 
     this.setState({
       formControls: updatedControls,
-      formIsValid: formIsValid
+      formIsValid: formIsValid,
+      formTouched: true
     });
   };
 
@@ -71,6 +73,10 @@ export default class LoginForm extends Component {
     for (let formElementId in this.state.formControls) {
       formData[formElementId] = this.state.formControls[formElementId].value;
     }
+
+    this.setState({
+      formTouched: false
+    })
 
     onSubmit(formData);
   };
@@ -119,7 +125,7 @@ export default class LoginForm extends Component {
             <div
               className={
                 "btn btn__block btn__color-3__filled submit-btn " +
-                (this.state.formIsValid ? "" : " disabled ") +
+                (!this.state.formIsValid || (!this.state.formTouched && status === Status.ERROR) ? " disabled " : "") +
                 (status === Status.LOADING ? " loading " : "")
               }
               onClick={this.formSubmitHandler}
