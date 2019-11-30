@@ -23,12 +23,23 @@ class Auth extends React.Component {
     this.props.tryLoggingIn(formData);
   }
   render() {
-    const { activeView } = this.props;
+    const { activeView, status, data } = this.props;
     return (
       <div className="view__container auth__container">
         <div className="view__container--inner auth__inner-container">
           <div className="absolute-center">
-            <LoginForm onSubmit={this.login} />
+          {(() => {
+            switch(activeView) {
+              default:
+                return (
+                  <LoginForm 
+                    status={status}
+                    submissionData={data}
+                    onSubmit={this.login} 
+                  />
+                );
+            }
+          })()}
           </div>
         </div>
       </div>

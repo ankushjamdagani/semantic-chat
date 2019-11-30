@@ -13,4 +13,9 @@
   .form-group {
     width: 100%;
   }
+  .form-error__block {
+    color: $Color1;
+    text-align: right;
+    padding: 10px 0;
+  }
 }

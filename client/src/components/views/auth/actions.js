@@ -1,4 +1,4 @@
-import { Endpoints } from "__CONSTANTS/endpoints";
+import { Endpoints } from "__CONSTANTS";
 
 import { setUserData } from "__SERVICES/auth";
 

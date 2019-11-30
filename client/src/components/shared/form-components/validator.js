@@ -23,7 +23,6 @@ const Validator = (value, rules) => {
       }
     }
   }
-  console.log(value, rules, isValid);
 
   return isValid;
 };
@@ -55,11 +54,10 @@ const maxLengthValidator = (value, maxLength) => {
  * @return
  */
 const isEmailValidator = (value, isEmail) => {
-  if(isEmail) {
+  if (isEmail) {
     var patt = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/gi;
     return value && patt.test(value);
-  }
-  else {
+  } else {
     // why would I want to check if it's not a valid email??????? WTF????/
     return !value || !patt.test(value);
   }

@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import "./styles.scss";
 
+import {
+  Status
+} from '__CONSTANTS';
+
 import { EmailInput, PasswordInput, Validator } from "__COMPONENTS/shared/";
 
-// status - "", "submitting", "submitted"
 export default class LoginForm extends Component {
   state = {
-    status: "",
     formIsValid: false,
     formControls: {
       email: {
@@ -54,7 +56,8 @@ export default class LoginForm extends Component {
 
     updatedControls[name] = updatedFormElement;
 
-    let formIsValid = !(Object.values(updatedControls).filter(x => !x.valid).length);
+    let formIsValid = !Object.values(updatedControls).filter(x => !x.valid)
+      .length;
 
     this.setState({
       formControls: updatedControls,
@@ -69,14 +72,23 @@ export default class LoginForm extends Component {
       formData[formElementId] = this.state.formControls[formElementId].value;
     }
 
-    this.setState({
-      status: "submitting"
-    });
-
     onSubmit(formData);
   };
 
   render = () => {
+    const {
+      submissionData,
+      status
+    } = this.props;
+
+    // if(status === Status.SUCCESS) {
+    //   return (
+    //     <div className="form-component login__form-component border-color-3 clearfix">
+    //       Successfull!!!
+    //     </div>
+    //   )
+    // }
+
     return (
       <div className="form-component login__form-component border-color-3 clearfix">
         <div className="form-inputs login__form-inputs">
@@ -88,7 +100,7 @@ export default class LoginForm extends Component {
             touched={this.state.formControls.email.touched}
             valid={this.state.formControls.email.valid}
             label={this.state.formControls.email.label}
-            isDisabled={this.state.status === "submitting"}
+            isDisabled={status === Status.LOADING}
           />
           <PasswordInput
             name="password"
@@ -98,26 +110,34 @@ export default class LoginForm extends Component {
             touched={this.state.formControls.password.touched}
             valid={this.state.formControls.password.valid}
             label={this.state.formControls.password.label}
-            isDisabled={this.state.status === "submitting"}
+            isDisabled={status === Status.LOADING}
           />
         </div>
 
         <div
           className={
             "btn btn__block btn__color-3__filled submit-btn " +
-            (this.state.formIsValid ? "" : " disabled ") + 
-            (this.state.status == "submitting" ? " loading " : "")
+            (this.state.formIsValid ? "" : " disabled ") +
+            (status === Status.LOADING ? " loading " : "")
           }
           onClick={this.formSubmitHandler}
         >
           <div className="btn-text">
-            {this.state.status == "submitting" ? (
+            {status === Status.LOADING ? (
               <span>Please wait...</span>
             ) : (
               <span>Login </span>
             )}
           </div>
         </div>
+
+        { status === Status.ERROR ? (
+          <div className="form-error__block">
+            <div className="form-error__text ts-sm">
+              {submissionData}
+            </div>
+          </div>
+        ) : ''}
       </div>
     );
   };

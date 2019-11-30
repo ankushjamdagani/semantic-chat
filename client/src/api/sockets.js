@@ -1,6 +1,6 @@
 import openSocket from "socket.io-client";
 
-import { Endpoints } from "__CONSTANTS/endpoints";
+import { Endpoints } from "__CONSTANTS";
 
 const socket = openSocket(Endpoints.CHAT_URL);
 

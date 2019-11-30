@@ -29,7 +29,7 @@
   }
 
   .control-error {
-    border-bottom: solid 1px red;
+    border-bottom: solid 1px $Color1;
   }
   [disabled] {
     cursor: not-allowed;

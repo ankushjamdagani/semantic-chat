@@ -119,7 +119,6 @@ export default class FormComponent extends Component {
   };
 
   render = () => {
-    console.log(this.state.formControls.preferredChannel);
     if (this.state.status == "submitted") {
       return (
         <div className="form-component contact-form-component">

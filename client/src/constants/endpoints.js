@@ -5,4 +5,4 @@ const Endpoints = {
   MESSAGE_URL: BASE_URL + "api/v1/message/"
 };
 
-export { Endpoints, BASE_URL };
+export default Endpoints;
