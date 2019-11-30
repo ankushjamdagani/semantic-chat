@@ -1,5 +1,9 @@
-.login-form-component {
-  .login-form-inputs {
+@import "__STYLES/helpers/variables";
+.login__form-component {
+  padding: 60px;
+  border-radius: 5px;
+  background: $Grey5;
+  .login__form-inputs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

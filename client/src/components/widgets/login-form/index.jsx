@@ -79,8 +79,8 @@ export default class LoginForm extends Component {
 
   render = () => {
     return (
-      <div className="form-component login-form-component clearfix">
-        <div className="login-form-inputs">
+      <div className="form-component login__form-component border-color-3 clearfix">
+        <div className="form-inputs login__form-inputs">
           <EmailInput
             name="email"
             placeholder={this.state.formControls.email.placeholder}
@@ -105,8 +105,9 @@ export default class LoginForm extends Component {
 
         <div
           className={
-            "btn btn-block submit-btn " +
-            (this.state.formIsValid ? "" : "disabled")
+            "btn btn__block btn__color-3__filled submit-btn " +
+            (this.state.formIsValid ? "" : " disabled ") + 
+            (this.state.status == "submitting" ? " loading " : "")
           }
           onClick={this.formSubmitHandler}
         >

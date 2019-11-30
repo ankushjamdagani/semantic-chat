@@ -1,50 +1,56 @@
-@import '__STYLES/helpers/variables';
+@import "__STYLES/helpers/variables";
 .pallete__container {
-    [class^='pallete__item--'] {
-        flex: 1;
-        transition: all .5s ease-in-out;
-        &:hover {
-            flex: 2;
-        }
+  [class^="pallete__item--"] {
+    flex: 1;
+    transition: all 0.5s ease-in-out;
+    &:hover {
+      flex: 2;
     }
+  }
 
-    .palette__item__label {
-        background: rgba(0,0,0,.5);
-        padding: 10px 20px;
-        color: $White;
-        margin-top: 20px;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0,0,0,.25);
-    }
+  .palette__item__label {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    color: $Grey5;
+    margin-top: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  }
 
-    .pallete__item--1 {
-        background-color: $Black;
-    }
-    .pallete__item--2 {
-        background-color: $BlackForContrast;
-    }
-    .pallete__item--3 {
-        background-color: $DarkGrey;
-    }
-    .pallete__item--4 {
-        background-color: $Grey;
-    }
-    .pallete__item--5 {
-        background-color: $LightGrey;
-    }
-    .pallete__item--6 {
-        background-color: $Whitish;
-    }
-    .pallete__item--7 {
-        background-color: $White;
-    }
-    .pallete__item--8 {
-        background-color: $Red;
-    }
-    .pallete__item--9 {
-        background-color: $Silver;
-    }
-    .pallete__item--10 {
-        background-color: $Gold;
-    }
+  .pallete__item--1 {
+    background-color: $Grey0;
+  }
+  .pallete__item--2 {
+    background-color: $Grey1;
+  }
+  .pallete__item--3 {
+    background-color: $Grey2;
+  }
+  .pallete__item--4 {
+    background-color: $Grey3;
+  }
+  .pallete__item--5 {
+    background-color: $Grey4;
+  }
+  .pallete__item--6 {
+    background-color: $Grey5;
+  }
+  .pallete__item--7 {
+    background-color: $Color0;
+  }
+  .pallete__item--8 {
+    background-color: $Color1;
+  }
+  .pallete__item--9 {
+    background-color: $Color2;
+  }
+  .pallete__item--10 {
+    background-color: $Color3;
+  }
+  .pallete__item--11 {
+    background-color: $Color4;
+  }
+  .pallete__item--12 {
+    background-color: $Color5;
+  }
 }

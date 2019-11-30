@@ -1,15 +1,23 @@
 // Theme is black and white. With subtle colors.
-$Black: #000;
-$BlackForContrast: #2c2c2c;
-$DarkGrey: #262626;
-$Grey: #3f3f3f;
-$LightGrey: #dcdcdc;
-$Whitish: #f5f5f5;
-$White: #fff;
-$Red: #c1432e;
-$Silver: #4b6777;
-$Gold: #ce9e62;
 
+// GreyScale
 
-$primary: $Grey;
-$secondary: $Whitish;
+$Grey0: #000;
+$Grey1: #2c2c2c;
+$Grey2: #3f3f3f;
+$Grey3: #dcdcdc;
+$Grey4: #f5f5f5;
+$Grey5: #fafafa;
+
+// Colored
+$Color0: #f8b195;
+$Color0Alpha: #f8b19526;
+$Color1: #f67280;
+$Color2: #c06c84;
+$Color3: #6c5b7b;
+$Color4: #272343;
+$Color4Alpha: #e9f0fe;
+$Color5: #2d132c;
+
+$primary: $Grey0;
+$secondary: $Color0;
