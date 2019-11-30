@@ -20,7 +20,7 @@ function initExpressController (app) {
   const USERS_MAP = {}
 
   io
-  .of('/chat')
+  .of('/socket/v1/chat')
   .on("connection", (socket) => {
     console.log('---- socket is connected');
   

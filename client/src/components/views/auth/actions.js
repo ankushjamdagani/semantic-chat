@@ -46,7 +46,7 @@ const loginError = data => {
 export const tryLoggingIn = data => {
   return dispatch => {
     dispatch(loginProgress());
-    fetch(Endpoints.AUTH_URL + "login", {
+    fetch(Endpoints.AUTH_URL + "/login", {
       method: "POST",
       // credentials: 'same-origin',
       credentials: "include",
@@ -93,7 +93,7 @@ const registerError = data => {
 export const tryRegisteringIn = data => {
   return dispatch => {
     dispatch(registerProgress());
-    fetch(Endpoints.AUTH_URL + "register", {
+    fetch(Endpoints.AUTH_URL + "/register", {
       method: "POST",
       credentials: "same-origin",
       headers: {
@@ -130,7 +130,7 @@ const logoutError = data => {
 export const tryLoggingOut = data => {
   return dispatch => {
     dispatch(logoutProgress());
-    fetch(Endpoints.AUTH_URL + "register", {
+    fetch(Endpoints.AUTH_URL + "/register", {
       method: "POST",
       credentials: "same-origin",
       headers: {
@@ -167,7 +167,7 @@ const forgotPasswordError = data => {
 export const tryForgotPassword = data => {
   return dispatch => {
     dispatch(forgotPasswordProgress());
-    fetch(Endpoints.AUTH_URL + "register", {
+    fetch(Endpoints.AUTH_URL + "/register", {
       method: "POST",
       credentials: "same-origin",
       headers: {
