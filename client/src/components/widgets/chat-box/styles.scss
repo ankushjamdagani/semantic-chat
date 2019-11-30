@@ -1,11 +1,13 @@
 @import "__STYLES/helpers/variables";
 .chat-box__container {
   .chat-box__body {
+    overflow: hidden;
   }
   .chat-box__output {
     height: calc(100vh - 58px);
     overflow: auto;
-    padding: 4px;
+    padding: 4px 30px;
+    margin: 0 -30px 0 -30px;
     .chat-item {
       margin: 4px 0;
       .chat-item__text {
@@ -15,6 +17,7 @@
         background: $Color2Alpha;
         display: inline-block;
         line-height: 1.5;
+        word-break: break-word;
       }
       .chat-item__timestamp {
         padding: 4px 0 8px;
