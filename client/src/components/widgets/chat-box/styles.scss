@@ -1,3 +1,4 @@
+@import "__STYLES/helpers/variables";
 .chat-box__container {
   .chat-box__body {
   }
@@ -8,23 +9,27 @@
     .chat-item {
       margin: 4px 0;
       .chat-item__text {
-        font-size: 13px;
-        letter-spacing: 0.5px;
-        background: #f2fbff;
+        display: inline-block;
         padding: 8px;
         border-radius: 2px;
+        background: $Color2Alpha;
         display: inline-block;
+        line-height: 1.5;
       }
       .chat-item__timestamp {
-        font-size: 9px;
-        letter-spacing: 0.1px;
         padding: 4px 0 8px;
+        color: $Grey2;
       }
       &.chat-item--sent {
         text-align: right;
       }
-      &.chat-item--recieved {
+      &.chat-item--recieve {
         text-align: left;
+        .chat-item__text {
+          background: $Color6Alpha;
+        }
+        .chat-item__timestamp {
+        }
       }
     }
   }

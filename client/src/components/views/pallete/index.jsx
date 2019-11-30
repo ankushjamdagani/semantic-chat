@@ -29,6 +29,10 @@ class Pallete extends React.Component {
           <div className="palette__item__label">$Grey5</div>
           <div className="palette__item__label">#fafafa</div>
         </div>
+        <div className="pallete__item--13">
+          <div className="palette__item__label">$Color6</div>
+          <div className="palette__item__label">#55ae95</div>
+        </div>
         <div className="pallete__item--7">
           <div className="palette__item__label">$Color0</div>
           <div className="palette__item__label">#f8b195</div>
@@ -52,6 +56,10 @@ class Pallete extends React.Component {
         <div className="pallete__item--12">
           <div className="palette__item__label">$Color5</div>
           <div className="palette__item__label">#2d132c</div>
+        </div>
+        <div className="pallete__item--14">
+          <div className="palette__item__label">$Color7</div>
+          <div className="palette__item__label">#00909e</div>
         </div>
       </div>
     );

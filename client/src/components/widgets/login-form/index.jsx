@@ -90,54 +90,58 @@ export default class LoginForm extends Component {
     // }
 
     return (
-      <div className="form-component login__form-component border-color-3 clearfix">
-        <div className="form-inputs login__form-inputs">
-          <EmailInput
-            name="email"
-            placeholder={this.state.formControls.email.placeholder}
-            value={this.state.formControls.email.value}
-            onChange={this.changeHandler}
-            touched={this.state.formControls.email.touched}
-            valid={this.state.formControls.email.valid}
-            label={this.state.formControls.email.label}
-            isDisabled={status === Status.LOADING}
-          />
-          <PasswordInput
-            name="password"
-            placeholder={this.state.formControls.password.placeholder}
-            value={this.state.formControls.password.value}
-            onChange={this.changeHandler}
-            touched={this.state.formControls.password.touched}
-            valid={this.state.formControls.password.valid}
-            label={this.state.formControls.password.label}
-            isDisabled={status === Status.LOADING}
-          />
-        </div>
-
-        <div
-          className={
-            "btn btn__block btn__color-3__filled submit-btn " +
-            (this.state.formIsValid ? "" : " disabled ") +
-            (status === Status.LOADING ? " loading " : "")
-          }
-          onClick={this.formSubmitHandler}
-        >
-          <div className="btn-text">
-            {status === Status.LOADING ? (
-              <span>Please wait...</span>
-            ) : (
-              <span>Login </span>
-            )}
-          </div>
-        </div>
-
-        { status === Status.ERROR ? (
-          <div className="form-error__block">
-            <div className="form-error__text ts-sm">
-              {submissionData}
+      <div className="widget__container login-form__container">
+        <div className="widget__container-inner">
+          <div className="widget__body login-form__body border-color-3 clearfix">
+            <div className="form-inputs login-form__inputs">
+              <EmailInput
+                name="email"
+                placeholder={this.state.formControls.email.placeholder}
+                value={this.state.formControls.email.value}
+                onChange={this.changeHandler}
+                touched={this.state.formControls.email.touched}
+                valid={this.state.formControls.email.valid}
+                label={this.state.formControls.email.label}
+                isDisabled={status === Status.LOADING}
+              />
+              <PasswordInput
+                name="password"
+                placeholder={this.state.formControls.password.placeholder}
+                value={this.state.formControls.password.value}
+                onChange={this.changeHandler}
+                touched={this.state.formControls.password.touched}
+                valid={this.state.formControls.password.valid}
+                label={this.state.formControls.password.label}
+                isDisabled={status === Status.LOADING}
+              />
             </div>
+
+            <div
+              className={
+                "btn btn__block btn__color-3__filled submit-btn " +
+                (this.state.formIsValid ? "" : " disabled ") +
+                (status === Status.LOADING ? " loading " : "")
+              }
+              onClick={this.formSubmitHandler}
+            >
+              <div className="btn-text">
+                {status === Status.LOADING ? (
+                  <span>Please wait...</span>
+                ) : (
+                  <span>Login </span>
+                )}
+              </div>
+            </div>
+
+            { status === Status.ERROR ? (
+              <div className="login-form__error-block">
+                <div className="login-form__error-text ts-sm">
+                  {submissionData}
+                </div>
+              </div>
+            ) : ''}
           </div>
-        ) : ''}
+        </div>
       </div>
     );
   };

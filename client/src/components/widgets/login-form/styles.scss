@@ -1,9 +1,11 @@
 @import "__STYLES/helpers/variables";
-.login__form-component {
-  padding: 60px;
-  border-radius: 5px;
-  background: $Grey5;
-  .login__form-inputs {
+.login-form__container {
+  .login-form__body {
+    padding: 60px;
+    border-radius: 5px;
+    background: $Grey5;
+  }
+  .login-form__inputs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -13,7 +15,7 @@
   .form-group {
     width: 100%;
   }
-  .form-error__block {
+  .login-form__error-block {
     color: $Color1;
     text-align: right;
     padding: 10px 0;

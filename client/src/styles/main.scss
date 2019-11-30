@@ -61,8 +61,11 @@ a {
   position: relative;
 }
 
-.widget__container {
+.widget__container, .widget__body {
   position: relative;
+}
+.row {
+  width: 100%;
 }
 
 .clearfix:after {
