@@ -54,8 +54,7 @@ export default class LoginForm extends Component {
 
     updatedControls[name] = updatedFormElement;
 
-    let formIsValid =
-      updatedControls.email.value && updatedControls.password.value;
+    let formIsValid = !(Object.values(updatedControls).filter(x => !x.valid).length);
 
     this.setState({
       formControls: updatedControls,
