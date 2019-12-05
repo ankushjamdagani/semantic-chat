@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 const SALT_WORK_FACTOR = 10;
 
 const UserSchema = new Schema({
@@ -9,7 +9,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     validate: {
-      validator: (value) => {
+      validator: value => {
         const patt = /^[a-z0-9_-]{3,15}$/gi;
         return value && patt.test(value);
       },
@@ -20,7 +20,7 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     validate: {
-      validator: (value) => {
+      validator: value => {
         return value && value.length >= 6 && value.length <= 15;
       },
       message: props => `Password (${props.value}) should be >= 6 and <= 15`
@@ -31,29 +31,29 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
     validate: {
-      validator: (value) => {
+      validator: value => {
         var patt = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/gi;
         return value && patt.test(value);
       },
       message: props => `Email (${props.value}) pattern is incorrect`
     }
   },
-	phone: {
+  phone: {
     type: String,
     required: true,
     unique: true,
     validate: {
-      validator: (value) => {
+      validator: value => {
         const patt = /^[0-9]{10}$/;
         return value && patt.test(value);
       },
       message: props => `Phone must be of 10 numerical characters`
     }
   },
-	description: {
+  description: {
     type: String,
     validate: {
-      validator: (value) => {
+      validator: value => {
         return value && value.length < 255;
       },
       message: props => `Description must be less than 255 characters.`
@@ -64,109 +64,126 @@ const UserSchema = new Schema({
     type: Boolean,
     default: true
   },
-  created_at: { 
-    type: Date, 
-    default: Date.now 
+  created_at: {
+    type: Date,
+    default: Date.now
   },
-  last_seen: { 
-    type: Date, 
-    default: Date.now 
+  last_seen: {
+    type: Date,
+    default: Date.now
   },
   messages: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Message'
+      ref: "Message"
     }
   ],
-	meta: Schema.Types.Mixed
+  meta: Schema.Types.Mixed
 });
 
 // https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
-UserSchema.pre('save', function(next) {
+UserSchema.pre("save", function(next) {
   var user = this;
 
   // only hash the password if it has been modified (or is new)
-  if (!user.isModified('password')) return next();
+  if (!user.isModified("password")) return next();
 
   // generate a salt
   bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+    if (err) return next(err);
+
+    // hash the password using our new salt
+    bcrypt.hash(user.password, salt, function(err, hash) {
       if (err) return next(err);
 
-      // hash the password using our new salt
-      bcrypt.hash(user.password, salt, function(err, hash) {
-          if (err) return next(err);
-
-          // override the cleartext password with the hashed one
-          user.password = hash;
-          next();
-      });
+      // override the cleartext password with the hashed one
+      user.password = hash;
+      next();
+    });
   });
 });
 
 UserSchema.methods.doesEmailExist = function(cb) {
-  this.model('User')
+  this.model("User")
     .find({
       email: this.email
     })
     .exec()
     .then(function(res) {
-      cb && cb(res.length !== 0)
+      cb && cb(res.length !== 0);
     })
     .catch(function(err) {
       throw err;
-    })
+    });
 };
 
 UserSchema.methods.doesPhoneExist = function(cb) {
-  this.model('User')
+  this.model("User")
     .find({
       phone: this.phone
     })
     .exec()
     .then(function(res) {
-      cb && cb(res.length !== 0)
+      cb && cb(res.length !== 0);
     })
     .catch(function(err) {
       throw err;
-    })
+    });
 };
 
 UserSchema.methods.doesPhoneOrEmailExist = function(cb) {
-  this.model('User')
+  this.model("User")
     .find()
-    .or([
-      {email: this.email},
-      {phone: this.phone}
-    ])
+    .or([{ email: this.email }, { phone: this.phone }])
     .then(function(res) {
-      cb && cb(res.length === 0)
+      cb && cb(res.length === 0);
     })
     .catch(function(err) {
       cb && cb(false, err);
-    })
-}
+      throw err;
+    });
+};
 
 UserSchema.methods.validPassword = function(password, cb) {
   bcrypt.compare(password, this.password, (err, isMatch) => {
-    if(err) throw err;
+    if (err) throw err;
 
     cb(isMatch);
-  })
-}
+  });
+};
 
-UserSchema.methods.getUserFromEmail = function(email, cb) {
-  this.model('User')
+UserSchema.methods.getUserFromId = function(id, cb) {
+  this.model("User")
     .findOne({
-      email: email
+      _id: id
     })
-    .then(function(user){
-      if(!user){
-        return cb(false, 'email is invalid');
+    .then(function(user) {
+      if (!user) {
+        return cb(false, "id is invalid");
       }
       return cb(user);
     })
-    .catch(done);
-}
+    .catch(err => {
+      cb && cb(false, err);
+      throw err;
+    });
+};
+
+UserSchema.methods.getUserFromEmail = function(email, cb) {
+  this.model("User")
+    .findOne({
+      email: email
+    })
+    .then(function(user) {
+      if (!user) {
+        return cb(false, "email is invalid");
+      }
+      return cb(user);
+    })
+    .catch(err => {
+      throw err;
+    });
+};
 
 UserSchema.methods.addUser = function(errorCallback, successCallback) {
   const newUser = new UserModel({
@@ -177,29 +194,27 @@ UserSchema.methods.addUser = function(errorCallback, successCallback) {
   });
 
   newUser.doesEmailExist(function(emailExist) {
-    if(emailExist) {
-      errorCallback('Email already exist!');
-    }
-    else {
+    if (emailExist) {
+      errorCallback("Email already exist!");
+    } else {
       newUser.doesPhoneExist(function(phoneExist) {
-        if(phoneExist) {
-          errorCallback('Phone already exist!');
-        }
-        else {
+        if (phoneExist) {
+          errorCallback("Phone already exist!");
+        } else {
           newUser
             .save()
             .then(user => {
               successCallback(user);
             })
             .catch(err => {
-              errorCallback('User registration failed!');
+              errorCallback("User registration failed!");
               throw err;
             });
         }
-      })
+      });
     }
   });
-}
+};
 
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
 module.exports = UserModel;

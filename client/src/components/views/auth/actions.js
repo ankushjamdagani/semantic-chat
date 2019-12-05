@@ -30,7 +30,6 @@ const loginProgress = data => {
   };
 };
 const loginComplete = data => {
-  setUserData(data);
   return {
     type: AUTH__LOG_IN__SUCCESS,
     payload: data
@@ -59,6 +58,7 @@ export const tryLoggingIn = data => {
       .then(res => {
         const isSuccess = res && res.status && res.status === "SUCCESS";
         if (isSuccess) {
+          setUserData(res.data);
           dispatch(loginComplete(res.data));
         } else {
           dispatch(loginError(res.error));

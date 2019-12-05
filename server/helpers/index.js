@@ -1,37 +1,34 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require("bcryptjs");
 
 const hashPassword = (password, callback) => {
-  bcrypt.genSalt(10, (err, salt) => 
-    bcrypt.hash(password, salt, callback)
-  )
-}
+  bcrypt.genSalt(10, (err, salt) => bcrypt.hash(password, salt, callback));
+};
 
-const constructResponse = (code, status, data) => {
-  if(status === 'SUCCESS') {
+const constructRestResponse = (code, status, data) => {
+  if (status === "SUCCESS") {
     return {
       code,
       status,
       data
-    }
-  }
-  else {
+    };
+  } else {
     return {
       code,
       status,
       error: data
-    }
+    };
   }
-}
+};
 
 const isAuthenticated = (req, res, next) => {
-  if(req.isAuthenticated()) {
+  if (req.isAuthenticated()) {
     next();
   }
-  res.redirect('/login')
-}
+  res.redirect("/login");
+};
 
 module.exports = {
   hashPassword,
-  constructResponse,
+  constructRestResponse,
   isAuthenticated
-}
+};
