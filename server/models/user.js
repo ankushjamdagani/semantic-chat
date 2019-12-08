@@ -60,7 +60,7 @@ const UserSchema = new Schema({
     }
   },
   profile_pic: String,
-  isActive: {
+  is_active: {
     type: Boolean,
     default: true
   },
@@ -183,6 +183,10 @@ UserSchema.methods.getUserFromEmail = function(email, cb) {
     .catch(err => {
       throw err;
     });
+};
+
+UserSchema.methods.updateUser = async function(id, data) {
+  return UserModel.findOneAndUpdate({ _id: id }, data, { new: true });
 };
 
 UserSchema.methods.addUser = function(errorCallback, successCallback) {

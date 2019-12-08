@@ -27,8 +27,21 @@ const isAuthenticated = (req, res, next) => {
   res.redirect("/login");
 };
 
+const parseUserDataToSend = (user_raw) => {
+  return {
+    _id: user_raw._id,
+    username: user_raw.username,
+    email: user_raw.email,
+    phone: user_raw.phone,
+    is_active: user_raw.is_active,
+    created_at: user_raw.created_at,
+    last_seen: user_raw.last_seen
+  }
+}
+
 module.exports = {
   hashPassword,
   constructRestResponse,
-  isAuthenticated
+  isAuthenticated,
+  parseUserDataToSend
 };
