@@ -10,6 +10,8 @@ const Routes = () => {
       <Switch>
         <Route exact path="/auth" component={Auth} />
         <Route exact path="/auth/*" component={Auth} />
+        <Route exact path="/login" component={Auth} />
+        <Route exact path="/login/*" component={Auth} />
         <Route exact path="/pallete" component={Pallete} />
         <Route exact path="/readme" component={ReadMe} />
         {/* Write all private components inside PrivateRoute */}

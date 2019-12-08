@@ -1,5 +1,5 @@
 import { Endpoints } from "__CONSTANTS";
-import { setUserData } from "__SERVICES/auth";
+import { setUserData, clearUserData } from "__SERVICES/auth";
 
 import {
   AUTH__CHANGE_VIEW,
@@ -65,7 +65,7 @@ export const tryLoggingIn = data => {
         }
       })
       .catch(err => {
-        dispatch(loginError(err.message || err));
+        dispatch(loginError(err));
       });
   };
 };
@@ -102,8 +102,17 @@ export const tryRegisteringIn = data => {
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then(res => dispatch(registerComplete(res.data)))
-      .catch(err => dispatch(registerError(err)));
+      .then(res => {
+        const isSuccess = res && res.status && res.status === "SUCCESS";
+        if (isSuccess) {
+          dispatch(registerComplete(res.data));
+        } else {
+          dispatch(registerError(res.error));
+        }
+      })
+      .catch(err => {
+        dispatch(registerError(err));
+      });
   };
 };
 
@@ -113,24 +122,15 @@ const logoutProgress = data => {
     payload: data
   };
 };
-const logoutComplete = data => {
-  // Redirect to login
-  return {
-    type: AUTH__LOG_OUT__SUCCESS,
-    payload: data
-  };
-};
-const logoutError = data => {
-  return {
-    type: AUTH__LOG_OUT__ERROR,
-    payload: data
-  };
+const logoutComplete = () => {
+  clearUserData();
+  window.location.href = "/auth";
 };
 
 export const tryLoggingOut = data => {
   return dispatch => {
     dispatch(logoutProgress());
-    fetch(Endpoints.AUTH_URL + "/register", {
+    fetch(Endpoints.AUTH_URL + "/logout", {
       method: "POST",
       credentials: "same-origin",
       headers: {
@@ -139,8 +139,12 @@ export const tryLoggingOut = data => {
       body: JSON.stringify(data)
     })
       .then(res => res.json())
-      .then(res => dispatch(logoutComplete(res.data)))
-      .catch(err => dispatch(logoutError(err)));
+      .then(res => {
+        dispatch(logoutComplete());
+      })
+      .catch(err => {
+        dispatch(logoutComplete());
+      });
   };
 };
 
@@ -167,7 +171,7 @@ const forgotPasswordError = data => {
 export const tryForgotPassword = data => {
   return dispatch => {
     dispatch(forgotPasswordProgress());
-    fetch(Endpoints.AUTH_URL + "/register", {
+    fetch(Endpoints.AUTH_URL + "/forgot_password", {
       method: "POST",
       credentials: "same-origin",
       headers: {

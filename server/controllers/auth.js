@@ -48,7 +48,10 @@ router.post("/login", function(req, res, next) {
 
 router.post("/logout", (req, res) => {
   req.logOut();
-  res.redirect("/login");
+  req.session.destroy(err => {
+    res.clearCookie("app_token");
+    res.send("Logged out");
+  });
 });
 
 router.post("/register", (req, res) => {

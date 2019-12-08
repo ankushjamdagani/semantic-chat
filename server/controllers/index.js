@@ -8,12 +8,14 @@ function initExpressController(app) {
   const { constructRestResponse } = require("../helpers");
 
   const requireLogin = (req, res, next) => {
-    if (req.isAuthenticated()) {
+    if (req.user) {
       next();
     } else {
-      res
-        .status(401)
-        .send(constructRestResponse(401, "Error", "Not logged in"));
+      req.logOut();
+      req.session.destroy(err => {
+        res.clearCookie("app_token");
+        res.status(401).send(constructRestResponse(401, "Error", "Logged out"));
+      });
     }
   };
 

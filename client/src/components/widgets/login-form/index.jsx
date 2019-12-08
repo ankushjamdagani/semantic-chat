@@ -142,7 +142,7 @@ export default class LoginForm extends Component {
             { status === Status.ERROR ? (
               <div className="login-form__error-block">
                 <div className="login-form__error-text ts-sm">
-                  {submissionData}
+                  {submissionData.toString()}
                 </div>
               </div>
             ) : ''}
