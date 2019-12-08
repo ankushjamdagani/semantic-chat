@@ -1,3 +1,5 @@
+import { getUserData } from "__SERVICES/auth";
+
 import {
   SOCKET__INITIATE,
   SOCKET__UPDATE_FRIENDS,
@@ -12,8 +14,16 @@ import {
 
 const INITIAL_STATE = {
   socketConn: null,
-  friendsList: [],
-  messagesList: {}, // id: [...messages]
+  friends: {
+    error: null,
+    loading: false,
+    data: []
+  },
+  messages: {
+    error: null,
+    loading: false,
+    data: {} // id: [...messages]
+  }
 };
 
 const homeReducer = (state = INITIAL_STATE, action) => {
@@ -25,9 +35,12 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       }
     }
     case SOCKET__UPDATE_FRIENDS: {
-      let friendsList = state.friendsList;
+      const friends = state.friends;
+      let friendsList = friends.data;
       const newFriend = action.payload;
+      
       const isFriendNew = friendsList.filter(user => user._id === newFriend._id).length === 0;
+
       if(isFriendNew) {
         friendsList = friendsList.concat([newFriend]);
       }
@@ -41,49 +54,99 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       }
       return {
         ...state,
-        friendsList
+        friends: {
+          ...state.friends,
+          data: friendsList
+        }
       }
     }
     case SOCKET__UPDATE_MESSAGE: {
       return {
         ...state,
-        messagesList: {}
+        messages: {
+          ...state.messages
+        }
       }
     }
+
     case HOME__GET_FRIENDS__PROGRESS: {
-      console.log(action);
+      const friends = state.friends;
       return {
-        ...state
-      }
-    }
-    case HOME__GET_FRIENDS__SUCCESS: {
-      console.log(action);
-      return {
-        ...state
+        ...state,
+        friends: {
+          ...friends,
+          loading: true,
+          error: null
+        }
       }
     }
     case HOME__GET_FRIENDS__ERROR: {
-      console.log(action);
+      const friends = state.friends;
+      const payload = action.payload;
       return {
-        ...state
+        ...state,
+        friends: {
+          ...friends,
+          loading: false,
+          error: payload
+        }
       }
     }
+    case HOME__GET_FRIENDS__SUCCESS: {
+      const payload = action.payload;
+      const currUser = getUserData();
+      const friends = payload.filter(user => user._id !== currUser._id);
+      return {
+        ...state,
+        friends: {
+          data: friends,
+          loading: false,
+          error: null
+        }
+      }
+    }
+
     case HOME__GET_MESSAGES__PROGRESS: {
-      console.log(action);
+      const messages = state.messages;
       return {
-        ...state
-      }
-    }
-    case HOME__GET_MESSAGES__SUCCESS: {
-      console.log(action);
-      return {
-        ...state
+        ...state,
+        messages: {
+          ...messages,
+          loading: true,
+          error: null
+        }
       }
     }
     case HOME__GET_MESSAGES__ERROR: {
-      console.log(action);
+      const messages = state.messages;
+      const payload = action.payload;
       return {
-        ...state
+        ...state,
+        messages: {
+          ...messages,
+          loading: false,
+          error: payload
+        }
+      }
+    }
+    case HOME__GET_MESSAGES__SUCCESS: {
+      const payload = action.payload;
+      const messageMap = {};
+      payload.forEach(message => {
+        if(messageMap[message.sender]) {
+          messageMap[message.sender].concat([message])
+        }
+        else {
+          messageMap[message.sender] = [message];
+        }
+      })
+      return {
+        ...state,
+        messages: {
+          data: messageMap,
+          loading: false,
+          error: null
+        }
       }
     }
     default: {

@@ -1,5 +1,4 @@
 import { Endpoints } from "__CONSTANTS";
-import { isUserLoggedIn } from "__SERVICES/auth";
 
 import {
   SOCKET__INITIATE,
@@ -53,33 +52,6 @@ export const fetchFriendsError = data => {
     payload: data
   };
 };
-export const tryLoggingIn = data => {
-  return dispatch => {
-    dispatch(loginProgress());
-    fetch(Endpoints.AUTH_URL + "/login", {
-      method: "POST",
-      // credentials: 'same-origin',
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(res => {
-        const isSuccess = res && res.status && res.status === "SUCCESS";
-        if (isSuccess) {
-          setUserData(res.data);
-          dispatch(loginComplete(res.data));
-        } else {
-          dispatch(loginError(res.error));
-        }
-      })
-      .catch(err => {
-        dispatch(loginError(err.message || err));
-      });
-  };
-};
 
 export const tryFetchingAllFriends = data => {
   return dispatch => {
@@ -96,10 +68,8 @@ export const tryFetchingAllFriends = data => {
       .then(res => res.json())
       .then(res => {
         const isSuccess = res && res.status && res.status === "SUCCESS";
-        console.log(res);
         if (isSuccess) {
-          setUserData(res.data);
-          dispatch(fetchFriendsSuccess(res));
+          dispatch(fetchFriendsSuccess(res.data));
         } else {
           dispatch(fetchFriendsError(res.error));
         }
@@ -144,8 +114,7 @@ export const tryFetchingAllMessages = data => {
       .then(res => {
         const isSuccess = res && res.status && res.status === "SUCCESS";
         if (isSuccess) {
-          setUserData(res.data);
-          dispatch(fetchMessagesSuccess(res));
+          dispatch(fetchMessagesSuccess(res.data));
         } else {
           dispatch(fetchMessagesError(res.error));
         }
