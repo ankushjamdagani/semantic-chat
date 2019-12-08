@@ -1,5 +1,12 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+const TYPE = Object.freeze({
+  DIRECT: 0,
+  MULTICAST: 1,
+  BROADCAST: 2,
+  STORY: 3
+});
 
 const MessageSchema = new Schema({
   content: {
@@ -8,21 +15,21 @@ const MessageSchema = new Schema({
   },
   sender: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User"
   },
   reciever: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: "User"
   },
-  timestamp: { 
-    type: Date, 
-    default: Date.now 
+  timestamp: {
+    type: Date,
+    default: Date.now
   },
   type: {
     type: String,
-    enum: ['SINGLE', 'MULTICAST', 'BROADCAST', 'STORY'],
+    enum: Object.values(TYPE)
   },
-	meta: Schema.Types.Mixed
-})
+  meta: Schema.Types.Mixed
+});
 
-module.exports = mongoose.model('Message', MessageSchema);
+module.exports = mongoose.model("Message", MessageSchema);

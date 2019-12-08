@@ -1,7 +1,5 @@
-import Status from './status';
-import Endpoints from './endpoints';
+import Status from "./status";
+import Message from "./message";
+import Endpoints from "./endpoints";
 
-export {
-  Status,
-  Endpoints
-}
+export { Message, Status, Endpoints };

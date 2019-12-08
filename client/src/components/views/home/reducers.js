@@ -1,6 +1,10 @@
 import { getUserData } from "__SERVICES/auth";
 
 import {
+  Status
+} from '__CONSTANTS';
+
+import {
   SOCKET__INITIATE,
   SOCKET__UPDATE_FRIENDS,
   SOCKET__UPDATE_MESSAGE,
@@ -15,14 +19,12 @@ import {
 const INITIAL_STATE = {
   socketConn: null,
   friends: {
-    error: null,
-    loading: false,
-    data: []
+    status: null,
+    data: null
   },
   messages: {
-    error: null,
-    loading: false,
-    data: {} // id: [...messages]
+    status: null,
+    data: null // id: [...messages]
   }
 };
 
@@ -35,17 +37,19 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       }
     }
     case SOCKET__UPDATE_FRIENDS: {
-      const friends = state.friends;
-      let friendsList = friends.data;
+      if(state.friends !== Status.SUCCESS) {
+        return state;
+      }
+
+      let friendsData = state.friends.data;
       const newFriend = action.payload;
-      
-      const isFriendNew = friendsList.filter(user => user._id === newFriend._id).length === 0;
+      const isFriendNew = friendsData.filter(user => user._id === newFriend._id).length === 0;
 
       if(isFriendNew) {
-        friendsList = friendsList.concat([newFriend]);
+        friendsData = friendsData.concat([newFriend]);
       }
       else {
-        friendsList = friendsList.map(user => {
+        friendsData = friendsData.map(user => {
           if(user._id === newFriend._id) {
             return newFriend
           }
@@ -56,7 +60,7 @@ const homeReducer = (state = INITIAL_STATE, action) => {
         ...state,
         friends: {
           ...state.friends,
-          data: friendsList
+          data: friendsData
         }
       }
     }
@@ -70,25 +74,20 @@ const homeReducer = (state = INITIAL_STATE, action) => {
     }
 
     case HOME__GET_FRIENDS__PROGRESS: {
-      const friends = state.friends;
       return {
         ...state,
         friends: {
-          ...friends,
-          loading: true,
-          error: null
+          status: Status.LOADING,
+          data: null
         }
       }
     }
     case HOME__GET_FRIENDS__ERROR: {
-      const friends = state.friends;
-      const payload = action.payload;
       return {
         ...state,
         friends: {
-          ...friends,
-          loading: false,
-          error: payload
+          status: Status.ERROR,
+          data: action.payload
         }
       }
     }
@@ -99,33 +98,27 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         friends: {
-          data: friends,
-          loading: false,
-          error: null
+          status: Status.SUCCESS,
+          data: friends
         }
       }
     }
 
     case HOME__GET_MESSAGES__PROGRESS: {
-      const messages = state.messages;
       return {
         ...state,
         messages: {
-          ...messages,
-          loading: true,
-          error: null
+          status: Status.LOADING,
+          data: null
         }
       }
     }
     case HOME__GET_MESSAGES__ERROR: {
-      const messages = state.messages;
-      const payload = action.payload;
       return {
         ...state,
         messages: {
-          ...messages,
-          loading: false,
-          error: payload
+          status: Status.ERROR,
+          data: action.payload
         }
       }
     }
@@ -143,9 +136,8 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         messages: {
-          data: messageMap,
-          loading: false,
-          error: null
+          status: Status.SUCCESS,
+          data: messageMap
         }
       }
     }

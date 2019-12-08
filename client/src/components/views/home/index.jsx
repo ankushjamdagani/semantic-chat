@@ -6,7 +6,7 @@ import io from "socket.io-client";
 
 import { Endpoints } from "__CONSTANTS";
 import { isUserLoggedIn, getUserData } from "__SERVICES/auth";
-import { ChatBox } from "__COMPONENTS/widgets";
+import { ChatBox, FriendsList } from "__COMPONENTS/widgets";
 
 import {
   preserveSocketConn,
@@ -28,7 +28,7 @@ class Home extends React.Component {
 
   componentDidUpdate = () => {
     const { socketConn } = this.props;
-    console.log('Update - socketConn - ', socketConn);
+    // console.log("Update - socketConn - ", socketConn);
     if (isUserLoggedIn() && !socketConn) {
       this.initiateSocketConn();
     }
@@ -54,16 +54,7 @@ class Home extends React.Component {
       socket.close();
     });
     window.addEventListener("socket_send_message", messgeData => {
-      // {
-      //   content,
-      //   sender,
-      //   reciever,
-      //   timestamp,
-      //   type,
-      //   meta
-      // }
       socket.emit("message", messgeData, data => {
-        console.log("message :: ", data);
         this.props.updateMessagesList(data);
       });
     });
@@ -72,16 +63,29 @@ class Home extends React.Component {
   fetchInitialData = () => {
     this.props.tryFetchingAllFriends();
     // this.props.tryFetchingAllMessages();
-  }
+  };
+
+  getMessageData = (friend, messages) => {
+    return (messages && friend.id && messages[friend.id]) || [];
+  };
 
   render() {
+    const { friends, messages, activeFriend = {} } = this.props;
+    const messageData = this.getMessageData(activeFriend, messages.data);
+
     return (
       <div className="view__container home__container">
         <div className="view__container--inner">
           <div className="view__body row">
-            <div className="col-xs-4"></div>
+            <div className="col-xs-4">
+              <FriendsList data={friends.data} status={friends.status} />
+            </div>
             <div className="col-xs-8">
-              <ChatBox />
+              <ChatBox
+                data={messageData}
+                friend={activeFriend}
+                status={messages.status}
+              />
             </div>
           </div>
         </div>
