@@ -7,13 +7,23 @@ function initExpressController(app) {
 
   const { constructRestResponse } = require("../helpers");
 
+  const requireLogin = (req, res, next) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+      res
+        .status(401)
+        .send(constructRestResponse(401, "Error", "Not logged in"));
+    }
+  };
+
   // Declare express routes
   app.get("/api", (req, res) =>
     res.status(200).send(constructRestResponse(200, "SUCCESS", "API works."))
   );
   app.use("/api/v1/auth", AuthController);
-  app.use("/api/v1/user", UserController);
-  app.use("/api/v1/message", MessageController);
+  app.use("/api/v1/user", requireLogin, UserController);
+  app.use("/api/v1/message", requireLogin, MessageController);
 
   // Declare socket routes
   const io = app.get("socketIo");

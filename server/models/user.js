@@ -152,16 +152,21 @@ UserSchema.methods.validPassword = function(password, cb) {
   });
 };
 
+UserSchema.methods.getUsers = function(filter = {}) {
+  return this.model("User").find(filter);
+};
+
 UserSchema.methods.getUserFromId = function(id, cb) {
-  this.model("User")
+  return this.model("User")
     .findOne({
       _id: id
     })
     .then(function(user) {
       if (!user) {
-        return cb(false, "id is invalid");
+        cb && cb(false, "id is invalid");
       }
-      return cb(user);
+      cb && cb(user);
+      return user;
     })
     .catch(err => {
       cb && cb(false, err);
@@ -187,6 +192,10 @@ UserSchema.methods.getUserFromEmail = function(email, cb) {
 
 UserSchema.methods.updateUser = async function(id, data) {
   return UserModel.findOneAndUpdate({ _id: id }, data, { new: true });
+};
+
+UserSchema.methods.removeUser = async function(id) {
+  return UserModel.findOneAndDelete({ _id: id });
 };
 
 UserSchema.methods.addUser = function(errorCallback, successCallback) {

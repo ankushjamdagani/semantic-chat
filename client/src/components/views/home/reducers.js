@@ -1,7 +1,13 @@
 import {
   SOCKET__INITIATE,
   SOCKET__UPDATE_FRIENDS,
-  SOCKET__UPDATE_MESSAGE
+  SOCKET__UPDATE_MESSAGE,
+  HOME__GET_FRIENDS__PROGRESS,
+  HOME__GET_FRIENDS__SUCCESS,
+  HOME__GET_FRIENDS__ERROR,
+  HOME__GET_MESSAGES__PROGRESS,
+  HOME__GET_MESSAGES__SUCCESS,
+  HOME__GET_MESSAGES__ERROR
 } from "./action-types";
 
 const INITIAL_STATE = {
@@ -42,6 +48,42 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         messagesList: {}
+      }
+    }
+    case HOME__GET_FRIENDS__PROGRESS: {
+      console.log(action);
+      return {
+        ...state
+      }
+    }
+    case HOME__GET_FRIENDS__SUCCESS: {
+      console.log(action);
+      return {
+        ...state
+      }
+    }
+    case HOME__GET_FRIENDS__ERROR: {
+      console.log(action);
+      return {
+        ...state
+      }
+    }
+    case HOME__GET_MESSAGES__PROGRESS: {
+      console.log(action);
+      return {
+        ...state
+      }
+    }
+    case HOME__GET_MESSAGES__SUCCESS: {
+      console.log(action);
+      return {
+        ...state
+      }
+    }
+    case HOME__GET_MESSAGES__ERROR: {
+      console.log(action);
+      return {
+        ...state
       }
     }
     default: {
