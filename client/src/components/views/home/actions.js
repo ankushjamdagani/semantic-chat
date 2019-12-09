@@ -83,8 +83,8 @@ export const changeActiveFriend = data => {
   return {
     type: HOME__SET_ACTIVE_FRIEND,
     payload: data
-  }
-}
+  };
+};
 
 export const fetchMessagesProgress = data => {
   return {

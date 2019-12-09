@@ -20,34 +20,33 @@ const AUTH_VIEWS = {
   LOGIN_VIEW: 0,
   REGISTER_VIEW: 1,
   FORGOT_VIEW: 2
-}
+};
 class Auth extends React.Component {
-
   componentDidMount() {
-    this.redirectIfLoggedIn()
+    this.redirectIfLoggedIn();
   }
-  
+
   componentDidUpdate() {
-    this.redirectIfLoggedIn()
+    this.redirectIfLoggedIn();
   }
 
   redirectIfLoggedIn = () => {
-    if(isUserLoggedIn()) {
-      window.location.href = '/';
+    if (isUserLoggedIn()) {
+      window.location.href = "/";
     }
-  }
+  };
 
   goToRegisterView = () => {
     this.props.changeActiveView(AUTH_VIEWS.REGISTER_VIEW);
-  }
+  };
 
   goToLoginView = () => {
     this.props.changeActiveView(AUTH_VIEWS.LOGIN_VIEW);
-  }
+  };
 
   goToForgotView = () => {
     this.props.changeActiveView(AUTH_VIEWS.FORGOT_VIEW);
-  }
+  };
 
   render() {
     const { activeView, status, data } = this.props;
@@ -55,29 +54,29 @@ class Auth extends React.Component {
       <div className="view__container auth__container">
         <div className="view__container--inner auth__inner-container">
           <div className="absolute-center">
-          {(() => {
-            switch(activeView) {
-              case AUTH_VIEWS.REGISTER_VIEW: 
-                return (
-                  <RegisterForm 
-                    status={status}
-                    submissionData={data}
-                    onSubmit={this.props.tryRegisteringIn} 
-                    goToLoginView={this.goToLoginView}
-                  />
-                )
-              default:
-                return (
-                  <LoginForm 
-                    status={status}
-                    submissionData={data}
-                    onSubmit={this.props.tryLoggingIn} 
-                    goToRegisterView={this.goToRegisterView}
-                    goToForgotView={this.goToForgotView}
-                  />
-                );
-            }
-          })()}
+            {(() => {
+              switch (activeView) {
+                case AUTH_VIEWS.REGISTER_VIEW:
+                  return (
+                    <RegisterForm
+                      status={status}
+                      submissionData={data}
+                      onSubmit={this.props.tryRegisteringIn}
+                      goToLoginView={this.goToLoginView}
+                    />
+                  );
+                default:
+                  return (
+                    <LoginForm
+                      status={status}
+                      submissionData={data}
+                      onSubmit={this.props.tryLoggingIn}
+                      goToRegisterView={this.goToRegisterView}
+                      goToForgotView={this.goToForgotView}
+                    />
+                  );
+              }
+            })()}
           </div>
         </div>
       </div>

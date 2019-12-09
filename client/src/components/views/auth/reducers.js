@@ -14,9 +14,7 @@ import {
   AUTH__FORGOT_PASSWORD__ERROR
 } from "./action-types";
 
-import {
-  Status
-} from '__CONSTANTS';
+import { Status } from "__CONSTANTS";
 
 const INITIAL_STATE = {
   activeView: "LOG_IN",

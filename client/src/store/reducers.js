@@ -5,5 +5,5 @@ import homeReducer from "../components/views/home/reducers";
 
 export default combineReducers({
   auth: authReducer,
-  home: homeReducer,
+  home: homeReducer
 });

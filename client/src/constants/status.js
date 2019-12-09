@@ -1,5 +1,5 @@
 export default {
-  SUCCESS: 'success',
-  ERROR: 'error',
-  LOADING: 'loading',
-}
+  SUCCESS: "success",
+  ERROR: "error",
+  LOADING: "loading"
+};

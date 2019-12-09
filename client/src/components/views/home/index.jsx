@@ -51,6 +51,10 @@ class Home extends React.Component {
   bindSocketListeners = socket => {
     socket.on("message", this.props.updateMessagesList);
     socket.on("friends_update", this.props.updateFriendsList);
+    socket.on("error", error => {
+      console.log("----------------- SOCKET ERROR ----------------");
+      console.error(error);
+    });
     window.addEventListener("beforeunload", function() {
       socket.close();
     });
@@ -64,16 +68,28 @@ class Home extends React.Component {
   sendMessage = messageData => {
     const { socketConn } = this.props;
     socketConn.emit("message", messageData, data => {
+      console.log(data);
       this.props.updateMessagesList(data);
     });
   };
 
   getMessageData = (friend, messages) => {
-    return (messages && friend && friend._id && messages[friend._id]) || [];
+    let pasrsedList = [];
+    if (messages && friend) {
+      pasrsedList = messages[friend._id] || [];
+      return pasrsedList.sort((x, y) => x.timestamp < y.timestamp);
+    }
+    return pasrsedList;
   };
 
   render() {
-    const { friends, messages, activeFriend, unseenMessages, changeActiveFriend } = this.props;
+    const {
+      friends,
+      messages,
+      activeFriend,
+      unseenMessages,
+      changeActiveFriend
+    } = this.props;
     const messageData = this.getMessageData(activeFriend, messages.data);
 
     return (

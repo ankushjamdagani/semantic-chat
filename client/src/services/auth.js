@@ -1,8 +1,8 @@
-import { getCookie } from './cookies';
+import { getCookie } from "./cookies";
 
 export const isUserLoggedIn = () => {
   const userData = getUserData();
-  const userToken = getCookie('app_token');
+  const userToken = getCookie("app_token");
   return !!(userData && userToken);
 };
 

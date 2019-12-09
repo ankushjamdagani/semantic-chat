@@ -11,7 +11,8 @@ import "./styles.scss";
 
 class ChatBox extends React.Component {
   state = {
-    activeMessage: ""
+    activeMessage: "",
+    currUser: getUserData()
   };
 
   onMessageType = evt => {
@@ -74,12 +75,10 @@ class ChatBox extends React.Component {
               <div className="clearfix chat-box__list">
                 {data &&
                   data.map((msg, index) => {
-                    let messageSource = "";
-                    if (msg.userId == this.state.userId) {
-                      messageSource = "sent";
-                    } else {
-                      messageSource = "recieve";
-                    }
+                    let messageSource =
+                      msg.sender === this.state.currUser._id
+                        ? "sent"
+                        : "recieved";
                     return (
                       <div
                         className={`chat-item chat-item--${messageSource}`}

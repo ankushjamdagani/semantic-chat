@@ -1,8 +1,6 @@
 import { getUserData } from "__SERVICES/auth";
 
-import {
-  Status
-} from '__CONSTANTS';
+import { Status } from "__CONSTANTS";
 
 import {
   SOCKET__INITIATE,
@@ -32,29 +30,29 @@ const INITIAL_STATE = {
 };
 
 const homeReducer = (state = INITIAL_STATE, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SOCKET__INITIATE: {
       return {
         ...state,
         socketConn: action.payload
-      }
+      };
     }
     case SOCKET__UPDATE_FRIENDS: {
-      if(state.friends !== Status.SUCCESS) {
+      if (state.friends.status !== Status.SUCCESS) {
         return state;
       }
 
       let friendsData = state.friends.data;
       const newFriend = action.payload;
-      const isFriendNew = friendsData.filter(user => user._id === newFriend._id).length === 0;
+      const isFriendNew =
+        friendsData.filter(user => user._id === newFriend._id).length === 0;
 
-      if(isFriendNew) {
+      if (isFriendNew) {
         friendsData = friendsData.concat([newFriend]);
-      }
-      else {
+      } else {
         friendsData = friendsData.map(user => {
-          if(user._id === newFriend._id) {
-            return newFriend
+          if (user._id === newFriend._id) {
+            return newFriend;
           }
           return user;
         });
@@ -65,25 +63,28 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           ...state.friends,
           data: friendsData
         }
-      }
+      };
     }
     case SOCKET__UPDATE_MESSAGE: {
       const messageMap = state.messages.data || {};
       const newMessage = action.payload;
-      const sender = newMessage.sender;
+
+      const currUser = getUserData();
+      const amISender = currUser._id === newMessage.sender;
+
+      const friendId = amISender ? newMessage.reciever : newMessage.sender;
+      const activeFriend = state.activeFriend;
+
       const unseenMessages = state.unseenMessages;
-      if(messageMap[sender]) {
-        messageMap[sender] = messageMap[sender].concat([newMessage]);
-      }
-      else {
-        messageMap[sender] = [newMessage];
+
+      if (messageMap[friendId]) {
+        messageMap[friendId] = messageMap[friendId].concat([newMessage]);
+      } else {
+        messageMap[friendId] = [newMessage];
       }
 
-      if(unseenMessages[sender]) {
-        unseenMessages[sender]++
-      }
-      else {
-        unseenMessages[sender] = 1;
+      if (!amISender && friendId !== activeFriend._id) {
+        unseenMessages[friendId] = (unseenMessages[friendId] || 0) + 1;
       }
       return {
         ...state,
@@ -92,7 +93,7 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           ...state.messages,
           data: messageMap
         }
-      }
+      };
     }
 
     case HOME__GET_FRIENDS__PROGRESS: {
@@ -102,7 +103,7 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           status: Status.LOADING,
           data: null
         }
-      }
+      };
     }
     case HOME__GET_FRIENDS__ERROR: {
       return {
@@ -111,7 +112,7 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           status: Status.ERROR,
           data: action.payload
         }
-      }
+      };
     }
     case HOME__GET_FRIENDS__SUCCESS: {
       const payload = action.payload;
@@ -123,20 +124,20 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           status: Status.SUCCESS,
           data: friends
         }
-      }
+      };
     }
 
     case HOME__SET_ACTIVE_FRIEND: {
       const activeFriend = action.payload;
       const unseenMessages = state.unseenMessages;
-      if(unseenMessages[activeFriend._id]) {
-        delete unseenMessages[activeFriend._id]
+      if (unseenMessages[activeFriend._id]) {
+        delete unseenMessages[activeFriend._id];
       }
       return {
         ...state,
         unseenMessages,
         activeFriend
-      }
+      };
     }
 
     case HOME__GET_MESSAGES__PROGRESS: {
@@ -146,7 +147,7 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           status: Status.LOADING,
           data: null
         }
-      }
+      };
     }
     case HOME__GET_MESSAGES__ERROR: {
       return {
@@ -155,31 +156,30 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           status: Status.ERROR,
           data: action.payload
         }
-      }
+      };
     }
     case HOME__GET_MESSAGES__SUCCESS: {
       const payload = action.payload;
       const messageMap = {};
       payload.forEach(message => {
-        if(messageMap[message.sender]) {
-          messageMap[message.sender].concat([message])
-        }
-        else {
+        if (messageMap[message.sender]) {
+          messageMap[message.sender].concat([message]);
+        } else {
           messageMap[message.sender] = [message];
         }
-      })
+      });
       return {
         ...state,
         messages: {
           status: Status.SUCCESS,
           data: messageMap
         }
-      }
+      };
     }
     default: {
       return state;
     }
   }
-}
+};
 
 export default homeReducer;

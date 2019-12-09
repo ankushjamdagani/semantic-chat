@@ -30,6 +30,7 @@ const SocketController = socket => {
   });
 
   socket.on("error", error => {
+    socket.to(socket.id).emit("error", error.toString());
     throw error;
   });
 
@@ -78,10 +79,10 @@ const SocketController = socket => {
     }
   });
 
-  socket.on("message", async data => {
+  socket.on("message", async (data, cb) => {
     const message = await _message.createMessage(data);
-    socket.to(USERS_MAP[message.sender]).emit("message", message);
     socket.to(USERS_MAP[message.reciever]).emit("message", message);
+    cb(data);
   });
 };
 
