@@ -163,7 +163,6 @@ export default class LoginForm extends Component {
                   <span className="ts-sm">New user? </span>
                   <a
                     className="ts-sm tc-color-6 tw-heavy bg-color-4-alpha"
-                    href="javascript:void(0)"
                     onClick={goToRegisterView}
                   >
                     Sign Up

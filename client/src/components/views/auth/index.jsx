@@ -36,15 +36,18 @@ class Auth extends React.Component {
     }
   };
 
-  goToRegisterView = () => {
+  goToRegisterView = e => {
+    e.preventDefault();
     this.props.changeActiveView(AUTH_VIEWS.REGISTER_VIEW);
   };
 
-  goToLoginView = () => {
+  goToLoginView = e => {
+    e.preventDefault();
     this.props.changeActiveView(AUTH_VIEWS.LOGIN_VIEW);
   };
 
-  goToForgotView = () => {
+  goToForgotView = e => {
+    e.preventDefault();
     this.props.changeActiveView(AUTH_VIEWS.FORGOT_VIEW);
   };
 
