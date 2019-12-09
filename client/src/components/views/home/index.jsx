@@ -54,11 +54,6 @@ class Home extends React.Component {
     window.addEventListener("beforeunload", function() {
       socket.close();
     });
-    window.addEventListener("socket_send_message", messgeData => {
-      socket.emit("message", messgeData, data => {
-        this.props.updateMessagesList(data);
-      });
-    });
   };
 
   fetchInitialData = () => {
@@ -66,12 +61,19 @@ class Home extends React.Component {
     // this.props.tryFetchingAllMessages();
   };
 
+  sendMessage = messageData => {
+    const { socketConn } = this.props;
+    socketConn.emit("message", messageData, data => {
+      this.props.updateMessagesList(data);
+    });
+  };
+
   getMessageData = (friend, messages) => {
-    return (messages && friend.id && messages[friend.id]) || [];
+    return (messages && friend && friend._id && messages[friend._id]) || [];
   };
 
   render() {
-    const { friends, messages, activeFriend, changeActiveFriend } = this.props;
+    const { friends, messages, activeFriend, unseenMessages, changeActiveFriend } = this.props;
     const messageData = this.getMessageData(activeFriend, messages.data);
 
     return (
@@ -83,6 +85,7 @@ class Home extends React.Component {
                 data={friends.data}
                 status={friends.status}
                 changeActiveFriend={changeActiveFriend}
+                unseenMessages={unseenMessages}
               />
             </div>
             <div className="col-xs-8">
@@ -91,6 +94,7 @@ class Home extends React.Component {
                   data={messageData}
                   friend={activeFriend}
                   status={messages.status}
+                  sendMessage={this.sendMessage}
                 />
               )}
             </div>

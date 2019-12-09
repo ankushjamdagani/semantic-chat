@@ -20,6 +20,7 @@ import {
 const INITIAL_STATE = {
   socketConn: null,
   activeFriend: null,
+  unseenMessages: {},
   friends: {
     status: null,
     data: null
@@ -67,10 +68,29 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       }
     }
     case SOCKET__UPDATE_MESSAGE: {
+      const messageMap = state.messages.data || {};
+      const newMessage = action.payload;
+      const sender = newMessage.sender;
+      const unseenMessages = state.unseenMessages;
+      if(messageMap[sender]) {
+        messageMap[sender] = messageMap[sender].concat([newMessage]);
+      }
+      else {
+        messageMap[sender] = [newMessage];
+      }
+
+      if(unseenMessages[sender]) {
+        unseenMessages[sender]++
+      }
+      else {
+        unseenMessages[sender] = 1;
+      }
       return {
         ...state,
+        unseenMessages,
         messages: {
-          ...state.messages
+          ...state.messages,
+          data: messageMap
         }
       }
     }
@@ -107,9 +127,15 @@ const homeReducer = (state = INITIAL_STATE, action) => {
     }
 
     case HOME__SET_ACTIVE_FRIEND: {
+      const activeFriend = action.payload;
+      const unseenMessages = state.unseenMessages;
+      if(unseenMessages[activeFriend._id]) {
+        delete unseenMessages[activeFriend._id]
+      }
       return {
         ...state,
-        activeFriend: action.payload
+        unseenMessages,
+        activeFriend
       }
     }
 

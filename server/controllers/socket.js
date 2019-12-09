@@ -78,15 +78,10 @@ const SocketController = socket => {
     }
   });
 
-  // TODO
   socket.on("message", async data => {
     const message = await _message.createMessage(data);
-    for (let userId in USERS_MAP) {
-      if (userId !== message.sender) {
-        socket.to(USERS_MAP[userId]).emit("message", message);
-      }
-    }
-    Console.log(message);
+    socket.to(USERS_MAP[message.sender]).emit("message", message);
+    socket.to(USERS_MAP[message.reciever]).emit("message", message);
   });
 };
 

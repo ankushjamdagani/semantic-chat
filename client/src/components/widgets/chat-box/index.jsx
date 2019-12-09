@@ -3,8 +3,6 @@ import moment from "moment";
 
 import { getUserData } from "__SERVICES/auth";
 
-import { onRecieveMessage, onSendMessage } from "__API/sockets";
-
 import { Status, Message } from "__CONSTANTS";
 
 import { TextInput, Validator } from "__COMPONENTS/shared/";
@@ -14,10 +12,6 @@ import "./styles.scss";
 class ChatBox extends React.Component {
   state = {
     activeMessage: ""
-  };
-
-  componentDidMount = () => {
-    onRecieveMessage(this.recieveMessage);
   };
 
   onMessageType = evt => {
@@ -33,7 +27,7 @@ class ChatBox extends React.Component {
         return;
       }
 
-      const { friend } = this.props;
+      const { friend, sendMessage } = this.props;
       const { activeMessage } = this.state;
       const userData = getUserData();
 
@@ -49,18 +43,10 @@ class ChatBox extends React.Component {
           activeMessage: ""
         },
         () => {
-          this.sendMessage(messageData);
+          sendMessage(messageData);
         }
       );
     }
-  };
-
-  sendMessage = messageData => {
-    onSendMessage(messageData);
-  };
-
-  recieveMessage = messageData => {
-    // messageData && this.addMessageToList(messageData);
   };
 
   getMessageDisplayTime = timestamp => {

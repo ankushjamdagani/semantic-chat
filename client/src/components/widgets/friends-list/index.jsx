@@ -11,7 +11,7 @@ class FriendsList extends React.Component {
   state = {};
 
   render = () => {
-    const { status, data, changeActiveFriend } = this.props;
+    const { status, data, unseenMessages, changeActiveFriend } = this.props;
     return (
       <div className="widget__container friends-list__container">
         <div className="widget__container-inner">
@@ -21,7 +21,7 @@ class FriendsList extends React.Component {
               data.map((x, index) => (
                 <div key={index} onClick={() => changeActiveFriend(x)}>
                   <br />
-                  {x.username}
+                  {x.username} - {unseenMessages[x._id]}
                   <br />
                 </div>
               ))}
