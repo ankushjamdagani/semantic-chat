@@ -104,13 +104,14 @@ UserSchema.pre("save", function(next) {
 });
 
 UserSchema.methods.doesEmailExist = function(cb) {
-  this.model("User")
+  return this.model("User")
     .find({
       email: this.email
     })
     .exec()
     .then(function(res) {
       cb && cb(res.length !== 0);
+      return res;
     })
     .catch(function(err) {
       throw err;
@@ -118,13 +119,14 @@ UserSchema.methods.doesEmailExist = function(cb) {
 };
 
 UserSchema.methods.doesPhoneExist = function(cb) {
-  this.model("User")
+  return this.model("User")
     .find({
       phone: this.phone
     })
     .exec()
     .then(function(res) {
       cb && cb(res.length !== 0);
+      return res;
     })
     .catch(function(err) {
       throw err;
@@ -132,11 +134,12 @@ UserSchema.methods.doesPhoneExist = function(cb) {
 };
 
 UserSchema.methods.doesPhoneOrEmailExist = function(cb) {
-  this.model("User")
+  return this.model("User")
     .find()
     .or([{ email: this.email }, { phone: this.phone }])
     .then(function(res) {
       cb && cb(res.length === 0);
+      return res;
     })
     .catch(function(err) {
       cb && cb(false, err);
@@ -175,7 +178,7 @@ UserSchema.methods.getUserFromId = function(id, cb) {
 };
 
 UserSchema.methods.getUserFromEmail = function(email, cb) {
-  this.model("User")
+  return this.model("User")
     .findOne({
       email: email
     })

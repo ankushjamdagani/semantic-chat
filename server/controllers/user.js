@@ -7,14 +7,14 @@ const { constructRestResponse, parseUserDataToSend } = require("../helpers");
 
 const _user = new UserModel();
 
-// Create a new User
-router.post("/", (req, res) => {
-  res
-    .status(200)
-    .send(
-      constructRestResponse(200, "SUCCESS", { TODO: req.isAuthenticated() })
-    );
-});
+// // Create a new User
+// router.post("/", (req, res) => {
+//   res
+//     .status(200)
+//     .send(
+//       constructRestResponse(200, "SUCCESS", { TODO: req.isAuthenticated() })
+//     );
+// });
 
 // Get all Users data
 router.get("/", async (req, res) => {

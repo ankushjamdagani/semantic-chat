@@ -18,6 +18,7 @@ const USERS_MAP = {};
 const SocketController = socket => {
   Console.log(`Connected [general] ${socket.id}`);
   const _user = new UserModel();
+  const _message = new MessageModel();
 
   /*
    * Miscleneous middleware
@@ -78,7 +79,8 @@ const SocketController = socket => {
   });
 
   // TODO
-  socket.on("message", function(message) {
+  socket.on("message", async data => {
+    const message = await _message.createMessage(data);
     for (let userId in USERS_MAP) {
       if (userId !== message.sender) {
         socket.to(USERS_MAP[userId]).emit("message", message);

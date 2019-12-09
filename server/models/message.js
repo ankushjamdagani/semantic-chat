@@ -32,4 +32,43 @@ const MessageSchema = new Schema({
   meta: Schema.Types.Mixed
 });
 
-module.exports = mongoose.model("Message", MessageSchema);
+MessageSchema.methods.createMessage = function(data) {
+  if (!data || !data.sender || !data.reciever || !data.content) {
+    throw "Invalid message";
+  }
+  const message = new MessageModel(data);
+  return message.save();
+};
+
+MessageSchema.methods.getMessages = function(filter = {}) {
+  return this.model("Message").find(filter);
+};
+
+MessageSchema.methods.getMessageFromId = function(id, cb) {
+  return this.model("Message")
+    .findOne({
+      _id: id
+    })
+    .then(function(message) {
+      if (!message) {
+        cb && cb(false, "id is invalid");
+      }
+      cb && cb(message);
+      return message;
+    })
+    .catch(err => {
+      cb && cb(false, err);
+      throw err;
+    });
+};
+
+MessageSchema.methods.updateMessage = async function(id, data) {
+  return MessageModel.findOneAndUpdate({ _id: id }, data, { new: true });
+};
+
+MessageSchema.methods.removeMessage = async function(id) {
+  return MessageModel.findOneAndDelete({ _id: id });
+};
+
+const MessageModel = mongoose.model("Message", MessageSchema);
+module.exports = MessageModel;
