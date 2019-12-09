@@ -1,10 +1,10 @@
 @import "__STYLES/helpers/variables";
-.login-form__container {
+.register-form__container {
   max-width: 520px;
   &:after {
     content: "";
     position: absolute;
-    background: $Color0Alpha;
+    background: $Color6Alpha;
     right: 35px;
     top: 35px;
     width: 100%;
@@ -13,13 +13,13 @@
     border-radius: 5px;
   }
 
-  .login-form__body {
+  .register-form__body {
     padding: 60px;
     border-radius: 5px;
     background: $Grey5;
     z-index: 1;
   }
-  .login-form__inputs {
+  .register-form__inputs {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -29,12 +29,12 @@
   .form-group {
     width: 100%;
   }
-  .login-form__error-block {
+  .register-form__error-block {
     color: $Color1;
     text-align: right;
     padding: 10px 0;
   }
-  .signup-info__block {
+  .signin-info__block {
     text-align: right;
     a {
       padding: 4px 8px;

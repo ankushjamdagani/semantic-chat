@@ -27,13 +27,10 @@ body {
 }
 
 a {
-  color: #333;
   text-decoration: none;
   &:hover,
-  &:focus,
-  &:visited,
-  &:active {
-    color: #333;
+  &:focus {
+    text-decoration: underline;
   }
 }
 
@@ -61,7 +58,8 @@ a {
   position: relative;
 }
 
-.widget__container, .widget__body {
+.widget__container,
+.widget__body {
   position: relative;
 }
 .row {

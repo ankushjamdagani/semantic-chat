@@ -10,7 +10,7 @@ import {
   tryForgotPassword
 } from "./actions";
 
-import { LoginForm } from "__COMPONENTS/widgets";
+import { LoginForm, RegisterForm } from "__COMPONENTS/widgets";
 
 import { isUserLoggedIn } from "__SERVICES/auth";
 
@@ -37,6 +37,18 @@ class Auth extends React.Component {
     }
   }
 
+  goToRegisterView = () => {
+    this.props.changeActiveView(AUTH_VIEWS.REGISTER_VIEW);
+  }
+
+  goToLoginView = () => {
+    this.props.changeActiveView(AUTH_VIEWS.LOGIN_VIEW);
+  }
+
+  goToForgotView = () => {
+    this.props.changeActiveView(AUTH_VIEWS.FORGOT_VIEW);
+  }
+
   render() {
     const { activeView, status, data } = this.props;
     return (
@@ -45,12 +57,23 @@ class Auth extends React.Component {
           <div className="absolute-center">
           {(() => {
             switch(activeView) {
+              case AUTH_VIEWS.REGISTER_VIEW: 
+                return (
+                  <RegisterForm 
+                    status={status}
+                    submissionData={data}
+                    onSubmit={this.props.tryRegisteringIn} 
+                    goToLoginView={this.goToLoginView}
+                  />
+                )
               default:
                 return (
                   <LoginForm 
                     status={status}
                     submissionData={data}
                     onSubmit={this.props.tryLoggingIn} 
+                    goToRegisterView={this.goToRegisterView}
+                    goToForgotView={this.goToForgotView}
                   />
                 );
             }

@@ -1,4 +1,27 @@
-@import '__STYLES/helpers/variables';
+@import "__STYLES/helpers/variables";
 .auth__container {
-    
+  .alternate-options__container {
+    .line-seperator__container {
+      margin: 16px 0;
+      position: relative;
+      height: calc(16px * 1.2);
+      &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        border-top: solid 3px $Color0Alpha;
+      }
+      .line-seperator__body {
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 40px;
+        text-align: center;
+        z-index: 1;
+      }
+    }
+  }
 }

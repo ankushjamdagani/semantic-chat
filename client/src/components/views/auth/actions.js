@@ -47,7 +47,6 @@ export const tryLoggingIn = data => {
     dispatch(loginProgress());
     fetch(Endpoints.AUTH_URL + "/login", {
       method: "POST",
-      // credentials: 'same-origin',
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
@@ -105,6 +104,10 @@ export const tryRegisteringIn = data => {
       .then(res => {
         const isSuccess = res && res.status && res.status === "SUCCESS";
         if (isSuccess) {
+          dispatch(tryLoggingIn({
+            email: data.email,
+            password: data.password
+          }));
           dispatch(registerComplete(res.data));
         } else {
           dispatch(registerError(res.error));

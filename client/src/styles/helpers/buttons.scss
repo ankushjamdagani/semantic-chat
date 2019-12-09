@@ -10,37 +10,58 @@
     border-color: $Grey5;
     color: $Grey1;
   }
-  &.btn__grey-1__filled {
+  &.btn__grey__filled {
     border-color: transparent;
     color: $Grey5;
     background: $Grey1;
     &.disabled {
-      background: #cdcdcd;
-      border: none;
       pointer-events: none;
-      background: $Grey3;
+      background: $Grey2;
+    }
+    &.loading,
+    &.loading.disabled {
+      background-image: linear-gradient(
+        90deg,
+        $Grey2 25%,
+        $Grey3 37%,
+        $Grey2 63%
+      );
     }
   }
-  &.btn__grey-2__filled {
-    border-color: transparent;
-    color: $Grey5;
-    background: $Grey2;
-    border: none;
-    &.disabled {
-      background: $Grey3;
-      border: none;
-      pointer-events: none;
-    }
-  }
-  &.btn__color-3__filled {
+  &.btn__violet__filled {
     border-color: transparent;
     color: $Grey5;
     background: $Color4;
     &.disabled {
-      background: #cdcdcd;
-      border: none;
       pointer-events: none;
       background: $Color3;
+    }
+    &.loading,
+    &.loading.disabled {
+      background-image: linear-gradient(
+        90deg,
+        $Color3 25%,
+        $Color2 37%,
+        $Color3 63%
+      );
+    }
+  }
+  &.btn__green__filled {
+    border-color: transparent;
+    color: $Grey5;
+    background: $Color7;
+    &.disabled {
+      pointer-events: none;
+      background: $Color6;
+    }
+    &.loading,
+    &.loading.disabled {
+      background-image: linear-gradient(
+        90deg,
+        $Color7 25%,
+        $Color6 37%,
+        $Color7 63%
+      );
     }
   }
   &.btn__big {
@@ -50,20 +71,15 @@
     display: block;
     padding: 15px 40px;
   }
-  &.loading, &.loading.disabled {
+  &.loading,
+  &.loading.disabled {
     animation: button-loading 1.4s ease infinite;
-    background: linear-gradient(
+    background-image: linear-gradient(
       90deg,
-      $Color3 25%,
-      $Color2 37%,
-      $Color3 63%
+      $Grey3 25%,
+      $Grey4 37%,
+      $Grey3 63%
     );
-    // background: linear-gradient(
-    //   90deg,
-    //   $Grey3 25%,
-    //   $Grey4 37%,
-    //   $Grey3 63%
-    // );
     background-size: 400% 100%;
     border: none;
 
@@ -73,7 +89,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       &:before {
-        content: '';
+        content: "";
         background: white;
         // Radius of 3px adds bulky corners
         border-radius: 2px;
@@ -84,10 +100,10 @@
         bottom: 1px;
         z-index: -1;
       }
-  
+
       &:after {
         animation: button-loading 1.4s ease infinite;
-        background: linear-gradient(
+        background-image: linear-gradient(
           90deg,
           $Color3 25%,
           $Color2 37%,
@@ -95,7 +111,7 @@
         );
         background-size: 400% 100%;
         border-radius: 3px;
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -106,7 +122,6 @@
     }
     &:not([class="btn-text"]) {
     }
-
   }
 }
 
@@ -115,7 +130,6 @@
     min-width: 65px;
   }
 }
-
 
 @keyframes button-loading {
   100% {
