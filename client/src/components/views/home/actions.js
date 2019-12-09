@@ -7,6 +7,7 @@ import {
   HOME__GET_FRIENDS__PROGRESS,
   HOME__GET_FRIENDS__SUCCESS,
   HOME__GET_FRIENDS__ERROR,
+  HOME__SET_ACTIVE_FRIEND,
   HOME__GET_MESSAGES__PROGRESS,
   HOME__GET_MESSAGES__SUCCESS,
   HOME__GET_MESSAGES__ERROR
@@ -77,6 +78,13 @@ export const tryFetchingAllFriends = data => {
       .catch(err => dispatch(fetchFriendsError(err)));
   };
 };
+
+export const changeActiveFriend = data => {
+  return {
+    type: HOME__SET_ACTIVE_FRIEND,
+    payload: data
+  }
+}
 
 export const fetchMessagesProgress = data => {
   return {

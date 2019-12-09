@@ -11,6 +11,7 @@ import {
   HOME__GET_FRIENDS__PROGRESS,
   HOME__GET_FRIENDS__SUCCESS,
   HOME__GET_FRIENDS__ERROR,
+  HOME__SET_ACTIVE_FRIEND,
   HOME__GET_MESSAGES__PROGRESS,
   HOME__GET_MESSAGES__SUCCESS,
   HOME__GET_MESSAGES__ERROR
@@ -18,6 +19,7 @@ import {
 
 const INITIAL_STATE = {
   socketConn: null,
+  activeFriend: null,
   friends: {
     status: null,
     data: null
@@ -101,6 +103,13 @@ const homeReducer = (state = INITIAL_STATE, action) => {
           status: Status.SUCCESS,
           data: friends
         }
+      }
+    }
+
+    case HOME__SET_ACTIVE_FRIEND: {
+      return {
+        ...state,
+        activeFriend: action.payload
       }
     }
 

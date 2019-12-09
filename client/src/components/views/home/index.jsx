@@ -12,6 +12,7 @@ import {
   preserveSocketConn,
   updateFriendsList,
   updateMessagesList,
+  changeActiveFriend,
   tryFetchingAllFriends,
   tryFetchingAllMessages
 } from "./actions";
@@ -70,7 +71,7 @@ class Home extends React.Component {
   };
 
   render() {
-    const { friends, messages, activeFriend = {} } = this.props;
+    const { friends, messages, activeFriend, changeActiveFriend } = this.props;
     const messageData = this.getMessageData(activeFriend, messages.data);
 
     return (
@@ -78,14 +79,20 @@ class Home extends React.Component {
         <div className="view__container--inner">
           <div className="view__body row">
             <div className="col-xs-4">
-              <FriendsList data={friends.data} status={friends.status} />
+              <FriendsList
+                data={friends.data}
+                status={friends.status}
+                changeActiveFriend={changeActiveFriend}
+              />
             </div>
             <div className="col-xs-8">
-              <ChatBox
-                data={messageData}
-                friend={activeFriend}
-                status={messages.status}
-              />
+              {activeFriend && (
+                <ChatBox
+                  data={messageData}
+                  friend={activeFriend}
+                  status={messages.status}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -105,6 +112,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     preserveSocketConn: bindActionCreators(preserveSocketConn, dispatch),
     updateFriendsList: bindActionCreators(updateFriendsList, dispatch),
     updateMessagesList: bindActionCreators(updateMessagesList, dispatch),
+    changeActiveFriend: bindActionCreators(changeActiveFriend, dispatch),
     tryFetchingAllFriends: bindActionCreators(tryFetchingAllFriends, dispatch),
     tryFetchingAllMessages: bindActionCreators(tryFetchingAllMessages, dispatch)
   };

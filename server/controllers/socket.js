@@ -84,7 +84,7 @@ const SocketController = socket => {
         socket.to(USERS_MAP[userId]).emit("message", message);
       }
     }
-    Console.log(` msg :: ${message.content}`);
+    Console.log(message);
   });
 };
 
