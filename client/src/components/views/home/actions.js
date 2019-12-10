@@ -75,7 +75,10 @@ export const tryFetchingAllFriends = data => {
           dispatch(fetchFriendsError(res.error));
         }
       })
-      .catch(err => dispatch(fetchFriendsError(err)));
+      .catch(err => {
+        console.error(err);
+        dispatch(fetchFriendsError(err))
+      });
   };
 };
 
@@ -109,14 +112,13 @@ export const fetchMessagesError = data => {
 export const tryFetchingAllMessages = data => {
   return dispatch => {
     dispatch(fetchMessagesProgress());
-    fetch(Endpoints.MESSAGE_URL, {
+    fetch(`${Endpoints.MESSAGE_URL}/list?id=${data.id}`, {
       method: "GET",
       // credentials: "same-origin",
       credentials: "include",
       headers: {
         "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      }
     })
       .then(res => res.json())
       .then(res => {
@@ -127,6 +129,9 @@ export const tryFetchingAllMessages = data => {
           dispatch(fetchMessagesError(res.error));
         }
       })
-      .catch(err => dispatch(fetchMessagesError(err)));
+      .catch(err => {
+        console.error(err);
+        dispatch(fetchMessagesError(err))
+      });
   };
 };

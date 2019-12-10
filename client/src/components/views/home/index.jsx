@@ -61,8 +61,9 @@ class Home extends React.Component {
   };
 
   fetchInitialData = () => {
+    const userData = getUserData();
     this.props.tryFetchingAllFriends();
-    // this.props.tryFetchingAllMessages();
+    this.props.tryFetchingAllMessages({ id: userData._id });
   };
 
   sendMessage = messageData => {

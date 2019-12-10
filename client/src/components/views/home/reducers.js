@@ -83,7 +83,7 @@ const homeReducer = (state = INITIAL_STATE, action) => {
         messageMap[friendId] = [newMessage];
       }
 
-      if (!amISender && friendId !== activeFriend._id) {
+      if (!amISender && (!activeFriend || friendId !== activeFriend._id)) {
         unseenMessages[friendId] = (unseenMessages[friendId] || 0) + 1;
       }
       return {
@@ -159,15 +159,21 @@ const homeReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case HOME__GET_MESSAGES__SUCCESS: {
-      const payload = action.payload;
-      const messageMap = {};
-      payload.forEach(message => {
-        if (messageMap[message.sender]) {
-          messageMap[message.sender].concat([message]);
+      const messageMap = state.messages.data || {};
+      const messageList = action.payload;
+      const currUser = getUserData();
+
+      messageList.forEach(msg => {
+        const amISender = currUser._id === msg.sender;
+        const friendId = amISender ? msg.reciever : msg.sender;
+
+        if (messageMap[friendId]) {
+          messageMap[friendId] = messageMap[friendId].concat([msg]);
         } else {
-          messageMap[message.sender] = [message];
+          messageMap[friendId] = [msg];
         }
       });
+
       return {
         ...state,
         messages: {
