@@ -30,10 +30,9 @@ class Home extends React.Component {
   componentDidUpdate = () => {
     const { socketConn } = this.props;
     const isLoggedIn = !!getUserData();
-    if(isLoggedIn) {
+    if (isLoggedIn) {
       !socketConn && this.initiateSocketConn();
-    }
-    else {
+    } else {
       clearUserData();
       window.location.href = "/auth";
     }
@@ -66,7 +65,7 @@ class Home extends React.Component {
 
   fetchInitialData = () => {
     const userData = getUserData();
-    if(!userData) {
+    if (!userData) {
       return;
     }
     this.props.tryFetchingAllFriends();
@@ -103,24 +102,21 @@ class Home extends React.Component {
       <div className="view__container home__container">
         <div className="view__container--inner">
           <div className="view__body row">
-            <div className="col-xs-4">
-              <FriendsList
-                data={friends.data}
-                status={friends.status}
-                changeActiveFriend={changeActiveFriend}
-                unseenMessages={unseenMessages}
+            <FriendsList
+              data={friends.data}
+              activeFriend={activeFriend}
+              status={friends.status}
+              changeActiveFriend={changeActiveFriend}
+              unseenMessages={unseenMessages}
+            />
+            {activeFriend && (
+              <ChatBox
+                data={messageData}
+                friend={activeFriend}
+                status={messages.status}
+                sendMessage={this.sendMessage}
               />
-            </div>
-            <div className="col-xs-8">
-              {activeFriend && (
-                <ChatBox
-                  data={messageData}
-                  friend={activeFriend}
-                  status={messages.status}
-                  sendMessage={this.sendMessage}
-                />
-              )}
-            </div>
+            )}
           </div>
         </div>
       </div>

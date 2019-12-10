@@ -1,3 +1,72 @@
+@import "__STYLES/helpers/variables";
 .friends-list__container {
-  
+  padding-right: 16px;
+  width: 320px;
+  .friends-list__body {
+    height: 100vh;
+    overflow: auto;
+    border-right: solid 2px $Color1Alpha;
+  }
+  .friend-item__body {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 8px 24px;
+    position: relative;
+    transition: all 0.25s;
+    border-right: solid 2px transparent;
+    .friend-item__thumb {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      color: $Color2;
+      background: $Color2Alpha;
+      text-align: center;
+      padding: 8px;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .friend-item__content {
+      padding: 0 4px 0 8px;
+      text-transform: capitalize;
+      transition: all 0.25s;
+      .primary-content {
+        padding-bottom: 4px;
+      }
+      .secondary-content {
+      }
+    }
+    .friend-item__seen-count {
+      border-radius: 50%;
+      width: 8px;
+      height: 8px;
+      top: 12px;
+      left: 8px;
+      animation: smooth-blink 1s linear infinite alternate;
+      position: absolute;
+      top: 40px;
+      left: 26px;
+    }
+    &:hover {
+      background: $Color0Alpha;
+      border-right: solid 2px $Color0;
+      .friend-item__content {
+        transform: translate(2px);
+      }
+    }
+    &.active {
+      background: $Color0Alpha;
+      border-right: solid 2px $Color1;
+    }
+  }
+}
+
+@keyframes smooth-blink {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.25);
+  }
 }

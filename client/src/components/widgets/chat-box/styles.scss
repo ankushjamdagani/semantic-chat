@@ -1,10 +1,11 @@
 @import "__STYLES/helpers/variables";
 .chat-box__container {
+  width: calc(100% - 320px);
   .chat-box__body {
     overflow: hidden;
   }
   .chat-box__output {
-    height: calc(100vh - 58px);
+    height: calc(100vh - 64px);
     overflow: auto;
     padding: 4px 30px;
     margin: 0 -30px 0 -30px;
@@ -14,7 +15,7 @@
         display: inline-block;
         padding: 8px;
         border-radius: 2px;
-        background: $Color2Alpha;
+        background: $Color6Alpha;
         display: inline-block;
         line-height: 1.5;
         word-break: break-word;
@@ -29,7 +30,7 @@
       &.chat-item--recieved {
         text-align: left;
         .chat-item__text {
-          background: $Color6Alpha;
+          background: $Color4Alpha;
         }
         .chat-item__timestamp {
         }
@@ -38,5 +39,11 @@
   }
   .chat-box__input {
     height: 58px;
+    input {
+      border-radius: 30px;
+      border-left: solid 10px $Color1Alpha !important;
+      border-right: solid 10px $Color1Alpha !important;
+      border-bottom: none !important;
+    }
   }
 }
