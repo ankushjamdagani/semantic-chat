@@ -1,11 +1,11 @@
 import { useHistory } from "react-router-dom";
 
-import { isUserLoggedIn, clearUserData } from "__SERVICES/auth";
+import { getUserData, clearUserData } from "__SERVICES/auth";
 
 const PrivateRoute = ({ children }) => {
   const history = useHistory();
 
-  if (isUserLoggedIn()) {
+  if (!!getUserData()) {
     return children;
   } else {
     clearUserData();

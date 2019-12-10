@@ -15,6 +15,11 @@ class ChatBox extends React.Component {
     currUser: getUserData()
   };
 
+  componentDidMount() {
+    let height = this.chatBoxOutput.scrollHeight;
+    this.chatBoxOutput.scroll(0, height);
+  }
+
   componentDidUpdate(prevProps, prevState) {
     const { status, data, friend } = this.props;
     if (
@@ -82,7 +87,7 @@ class ChatBox extends React.Component {
         <div className="widget__container-inner">
           <div className="widget__body chat-box__body">
             <div
-              className="chat-box__output smooth-scroll"
+              className="chat-box__output"
               ref={ref => (this.chatBoxOutput = ref)}
             >
               <div className="clearfix chat-box__list">

@@ -12,7 +12,7 @@ import {
 
 import { LoginForm, RegisterForm } from "__COMPONENTS/widgets";
 
-import { isUserLoggedIn } from "__SERVICES/auth";
+import { getUserData } from "__SERVICES/auth";
 
 import "./styles.scss";
 
@@ -31,7 +31,7 @@ class Auth extends React.Component {
   }
 
   redirectIfLoggedIn = () => {
-    if (isUserLoggedIn()) {
+    if (!!getUserData()) {
       window.location.href = "/";
     }
   };

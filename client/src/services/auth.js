@@ -8,7 +8,8 @@ export const isUserLoggedIn = () => {
 
 export const getUserData = () => {
   try {
-    return JSON.parse(localStorage.getItem("user_data"));
+    const userToken = getCookie("app_token");
+    return userToken && JSON.parse(localStorage.getItem("user_data"));
   } catch (e) {
     return false;
   }

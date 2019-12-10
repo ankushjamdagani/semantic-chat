@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import io from "socket.io-client";
 
 import { Endpoints } from "__CONSTANTS";
-import { isUserLoggedIn, getUserData } from "__SERVICES/auth";
+import { getUserData, clearUserData } from "__SERVICES/auth";
 import { ChatBox, FriendsList } from "__COMPONENTS/widgets";
 
 import {
@@ -22,16 +22,20 @@ class Home extends React.Component {
   // Get data for previous messages and friends with their online status
   componentDidMount = () => {
     const { socketConn } = this.props;
-    if (isUserLoggedIn() && !socketConn) {
+    if (!!getUserData() && !socketConn) {
       this.initiateSocketConn();
     }
   };
 
   componentDidUpdate = () => {
     const { socketConn } = this.props;
-    // console.log("Update - socketConn - ", socketConn);
-    if (isUserLoggedIn() && !socketConn) {
-      this.initiateSocketConn();
+    const isLoggedIn = !!getUserData();
+    if(isLoggedIn) {
+      !socketConn && this.initiateSocketConn();
+    }
+    else {
+      clearUserData();
+      window.location.href = "/auth";
     }
   };
 
@@ -62,6 +66,9 @@ class Home extends React.Component {
 
   fetchInitialData = () => {
     const userData = getUserData();
+    if(!userData) {
+      return;
+    }
     this.props.tryFetchingAllFriends();
     this.props.tryFetchingAllMessages({ id: userData._id });
   };
@@ -69,7 +76,6 @@ class Home extends React.Component {
   sendMessage = messageData => {
     const { socketConn } = this.props;
     socketConn.emit("message", messageData, data => {
-      console.log(data);
       this.props.updateMessagesList(data);
     });
   };
