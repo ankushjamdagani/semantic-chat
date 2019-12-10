@@ -13,7 +13,7 @@
     align-items: center;
     padding: 8px 24px;
     position: relative;
-    transition: all 0.25s;
+    transition: background 0.25s, border-right 0.25s;
     border-right: solid 2px transparent;
     .friend-item__thumb {
       display: inline-block;
@@ -57,7 +57,9 @@
     }
     &.active {
       background: $Color0Alpha;
+      border: solid 1px $Color1Alpha;
       border-right: solid 2px $Color1;
+      border-left: none;
     }
   }
 }
