@@ -1,29 +1,36 @@
 @import "__STYLES/helpers/variables";
 .friends-list__container {
-  padding-right: 16px;
-  width: 320px;
-  .friends-list__body {
-    height: 100vh;
-    overflow: auto;
-    border-right: solid 2px $Color1Alpha;
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+  .friends-search__container {
+    padding: 8px 8px 0 8px;
+    .friends-search-box {
+      margin-bottom: 8px;
+      input {
+        border-radius: 30px;
+        background: transparent;
+        border: solid 1px $Color1Alpha !important;
+      }
+    }
   }
   .friend-item__body {
     cursor: pointer;
     display: flex;
     align-items: center;
-    padding: 8px 24px;
+    padding: 8px 16px;
     position: relative;
     transition: background 0.25s, border-right 0.25s;
-    border-right: solid 2px transparent;
+    border-left: solid 2px transparent;
     .friend-item__thumb {
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 40px;
       height: 40px;
       border-radius: 50%;
       color: $Color2;
       background: $Color2Alpha;
-      text-align: center;
-      padding: 8px;
       text-transform: uppercase;
       transition: all 0.25s;
     }
@@ -50,7 +57,6 @@
     }
     &:hover {
       background: $Color0Alpha;
-      border-right: solid 2px $Color0;
       .friend-item__content {
         transform: translate(2px);
       }
@@ -58,8 +64,8 @@
     &.active {
       background: $Color0Alpha;
       border: solid 1px $Color1Alpha;
-      border-right: solid 2px $Color1;
-      border-left: none;
+      border-left: solid 2px $Color1;
+      border-right: none;
     }
   }
 }

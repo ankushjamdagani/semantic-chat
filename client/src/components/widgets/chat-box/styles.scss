@@ -1,14 +1,17 @@
 @import "__STYLES/helpers/variables";
 .chat-box__container {
-  width: calc(100% - 320px);
   .chat-box__body {
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 16px 16px 16px 0;
   }
   .chat-box__output {
-    height: calc(100vh - 64px);
     overflow: auto;
     padding: 4px 30px;
     margin: 0 -30px 0 -30px;
+    flex: 1;
     .chat-item {
       margin: 4px 16px;
       position: relative;
@@ -18,11 +21,16 @@
         top: 0;
         border: solid 6px transparent;
       }
+      &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        border: solid 6px transparent;
+      }
       .chat-item__text {
         display: inline-block;
         padding: 8px;
         border-radius: 2px;
-        background: $Color6Alpha;
         display: inline-block;
         line-height: 1.5;
         word-break: break-word;
@@ -39,20 +47,34 @@
           right: -12px;
           border-top-color: $Color6Alpha;
           border-left-color: $Color6Alpha;
-          border-top-right-radius: 6px;
-          // border-bottom-left-radius: 6px;
+        }
+        &:before {
+          right: -12px;
+          border-top-color: $Color6Alpha;
+          border-left-color: $Color6Alpha;
+        }
+        .chat-item__text {
+          background: $Color6Alpha;
+          border-top-right-radius: 0;
+          border: solid 1px $Color6Alpha;
         }
       }
       &.chat-item--recieved {
         text-align: left;
         &:after {
-          border-top-color: #6ba8a933;
-          border-right-color: #6ba8a933;
+          border-top-color: $Color4Alpha;
+          border-right-color: $Color4Alpha;
           left: -12px;
-          border-top-left-radius: 6px;
+        }
+        &:before {
+          border-top-color: $Color4Alpha;
+          border-right-color: $Color4Alpha;
+          left: -12px;
         }
         .chat-item__text {
           background: $Color4Alpha;
+          border-top-left-radius: 0;
+          border: solid 1px $Color4Alpha;
         }
         .chat-item__timestamp {
         }
@@ -60,7 +82,9 @@
     }
   }
   .chat-box__input {
-    height: 58px;
+    .chat-input-box {
+      margin-bottom: 0;
+    }
     input {
       border-radius: 30px;
       border-left: solid 10px $Color1Alpha !important;

@@ -55,13 +55,16 @@ a {
   height: 100vh;
   position: relative;
 }
+.view__body {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 
 .widget__container,
 .widget__body {
   position: relative;
-}
-.row {
-  width: 100%;
 }
 
 .clearfix:after {

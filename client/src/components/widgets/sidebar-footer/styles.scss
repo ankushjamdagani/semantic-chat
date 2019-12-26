@@ -1,0 +1,33 @@
+@import "__STYLES/helpers/variables";
+.sidebar-footer__container {
+  border-top: solid 1px $Color1Alpha;
+  .footer-control__container {
+    display: flex;
+    justify-content: space-between;
+    .footer-control__group {
+      display: flex;
+      justify-content: center;
+    }
+    .footer-control__group:first-child {
+      .footer-control__item {
+        border-right: solid 1px $Color1Alpha;
+      }
+    }
+    .footer-control__group:last-child {
+      .footer-control__item {
+        border-left: solid 1px $Color1Alpha;
+      }
+    }
+    .footer-control__item {
+      display: flex;
+      cursor: pointer;
+      padding: 16px;
+      .text {
+        margin-right: 10px;
+      }
+      &:hover {
+        background-color: $Color1Alpha;
+      }
+    }
+  }
+}

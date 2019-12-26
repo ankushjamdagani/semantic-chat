@@ -1,0 +1,29 @@
+@import "__STYLES/helpers/variables";
+.sidebar-header__container {
+  padding: 16px;
+  border-bottom: solid 1px $Color1Alpha;
+  background-size: 320px;
+  background-position: bottom center;
+  position: relative;
+  .user-info__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    position: relative;
+    text-align: center;
+    text-transform: capitalize;
+    .user__thumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: $Color6;
+      background: $Color6Alpha;
+      text-transform: uppercase;
+      margin: 0 auto 8px;
+    }
+  }
+}

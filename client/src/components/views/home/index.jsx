@@ -7,7 +7,12 @@ import io from "socket.io-client";
 
 import { Endpoints } from "__CONSTANTS";
 import { getUserData, clearUserData } from "__SERVICES/auth";
-import { ChatBox, FriendsList } from "__COMPONENTS/widgets";
+import {
+  ChatBox,
+  FriendsList,
+  SidebarHeader,
+  SidebarFooter
+} from "__COMPONENTS/widgets";
 
 import {
   preserveSocketConn,
@@ -106,22 +111,30 @@ class Home extends React.Component {
     return (
       <div className="view__container home__container">
         <div className="view__container--inner">
-          <div className="view__body row">
-            <FriendsList
-              data={friends.data}
-              activeFriend={activeFriend}
-              status={friends.status}
-              changeActiveFriend={changeActiveFriend}
-              unseenMessages={unseenMessages}
-            />
-            {activeFriend && (
-              <ChatBox
-                data={messageData}
-                friend={activeFriend}
-                status={messages.status}
-                sendMessage={this.sendMessage}
-              />
-            )}
+          <div className="view__body">
+            <div className="sidebar__container">
+              <div className="sidebar__content">
+                <SidebarHeader />
+                <FriendsList
+                  data={friends.data}
+                  activeFriend={activeFriend}
+                  status={friends.status}
+                  changeActiveFriend={changeActiveFriend}
+                  unseenMessages={unseenMessages}
+                />
+                <SidebarFooter />
+              </div>
+            </div>
+            <div className="content__container">
+              {activeFriend && (
+                <ChatBox
+                  data={messageData}
+                  friend={activeFriend}
+                  status={messages.status}
+                  sendMessage={this.sendMessage}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
