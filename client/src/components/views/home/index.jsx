@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import moment from "moment";
 
 import io from "socket.io-client";
 
@@ -31,7 +32,7 @@ class Home extends React.Component {
     const { socketConn } = this.props;
     const isLoggedIn = !!getUserData();
     if (isLoggedIn) {
-      !socketConn && this.initiateSocketConn();
+      // !socketConn && this.initiateSocketConn();
     } else {
       clearUserData();
       window.location.href = "/auth";
@@ -83,7 +84,11 @@ class Home extends React.Component {
     let pasrsedList = [];
     if (messages && friend) {
       pasrsedList = messages[friend._id] || [];
-      return pasrsedList.sort((x, y) => x.timestamp < y.timestamp);
+      pasrsedList = pasrsedList.map(msg => {
+        msg.timestamp = moment(msg.timestamp);
+        return msg;
+      });
+      return pasrsedList.sort((x, y) => x.timestamp.diff(y.timestamp) > 0);
     }
     return pasrsedList;
   };

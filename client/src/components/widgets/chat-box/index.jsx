@@ -69,15 +69,14 @@ class ChatBox extends React.Component {
   };
 
   getMessageDisplayTime = timestamp => {
-    const msgDate = moment(timestamp);
     const today = moment();
 
-    if (today.diff(msgDate, "days") === 0) {
-      return msgDate.format("HH:mm a");
-    } else if (today.diff(msgDate, "year") === 0) {
-      return msgDate.format("DD MMM [at] HH:mm a");
+    if (today.diff(timestamp, "days") === 0) {
+      return timestamp.format("HH:mm a");
+    } else if (today.diff(timestamp, "year") === 0) {
+      return timestamp.format("DD MMM [at] HH:mm a");
     }
-    return msgDate.format("DD MMM YYYY [at] HH:mm a");
+    return timestamp.format("DD MMM YYYY [at] HH:mm a");
   };
 
   render = () => {
