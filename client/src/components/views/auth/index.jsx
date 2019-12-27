@@ -53,7 +53,7 @@ class Auth extends React.Component {
   render() {
     const { activeView, status, data } = this.props;
     return (
-      <div className="view__container auth__container bg-grey-5">
+      <div className="view__container auth__container">
         <div className="view__container--inner auth__inner-container">
           <div className="absolute-center">
             {(() => {
@@ -92,7 +92,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = dispatch => {
   return {
     changeActiveView: bindActionCreators(changeActiveView, dispatch),
     tryLoggingIn: bindActionCreators(tryLoggingIn, dispatch),

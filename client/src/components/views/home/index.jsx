@@ -136,6 +136,11 @@ class Home extends React.Component {
                 />
               )}
             </div>
+            <div className="sidebar__container">
+              <div className="sidebar__content">
+                
+              </div>
+            </div>
           </div>
         </div>
       </div>
