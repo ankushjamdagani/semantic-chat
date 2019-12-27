@@ -1,5 +1,5 @@
 import { Endpoints } from "__CONSTANTS";
-import { setUserData, clearUserData } from "__SERVICES/auth";
+import { setUserData } from "__SERVICES/auth";
 
 import {
   AUTH__CHANGE_VIEW,
@@ -9,9 +9,6 @@ import {
   AUTH__REGISTER__PROGRESS,
   AUTH__REGISTER__SUCCESS,
   AUTH__REGISTER__ERROR,
-  AUTH__LOG_OUT__PROGRESS,
-  AUTH__LOG_OUT__SUCCESS,
-  AUTH__LOG_OUT__ERROR,
   AUTH__FORGOT_PASSWORD__PROGRESS,
   AUTH__FORGOT_PASSWORD__SUCCESS,
   AUTH__FORGOT_PASSWORD__ERROR
@@ -117,38 +114,6 @@ export const tryRegisteringIn = data => {
       })
       .catch(err => {
         dispatch(registerError(err));
-      });
-  };
-};
-
-const logoutProgress = data => {
-  return {
-    type: AUTH__LOG_OUT__PROGRESS,
-    payload: data
-  };
-};
-const logoutComplete = () => {
-  clearUserData();
-  window.location.href = "/auth";
-};
-
-export const tryLoggingOut = data => {
-  return dispatch => {
-    dispatch(logoutProgress());
-    fetch(Endpoints.AUTH_URL + "/logout", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
-    })
-      .then(res => res.json())
-      .then(res => {
-        dispatch(logoutComplete());
-      })
-      .catch(err => {
-        dispatch(logoutComplete());
       });
   };
 };

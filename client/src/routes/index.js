@@ -15,9 +15,7 @@ const Routes = () => {
         <Route exact path="/pallete" component={Pallete} />
         <Route exact path="/readme" component={ReadMe} />
         {/* Write all private components inside PrivateRoute */}
-        <PrivateRoute>
-          <Route path="/" component={Home} />
-        </PrivateRoute>
+        <PrivateRoute path="/" component={Home} />
       </Switch>
     </Router>
   );

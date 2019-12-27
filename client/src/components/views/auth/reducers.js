@@ -6,9 +6,6 @@ import {
   AUTH__REGISTER__PROGRESS,
   AUTH__REGISTER__SUCCESS,
   AUTH__REGISTER__ERROR,
-  AUTH__LOG_OUT__PROGRESS,
-  AUTH__LOG_OUT__SUCCESS,
-  AUTH__LOG_OUT__ERROR,
   AUTH__FORGOT_PASSWORD__PROGRESS,
   AUTH__FORGOT_PASSWORD__SUCCESS,
   AUTH__FORGOT_PASSWORD__ERROR
@@ -69,28 +66,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
       };
     }
     case AUTH__REGISTER__ERROR: {
-      return {
-        ...state,
-        status: Status.ERROR,
-        data: action.payload
-      };
-    }
-
-    case AUTH__LOG_OUT__PROGRESS: {
-      return {
-        ...state,
-        status: Status.LOADING,
-        data: null
-      };
-    }
-    case AUTH__LOG_OUT__SUCCESS: {
-      return {
-        ...state,
-        status: Status.SUCCESS,
-        data: action.payload
-      };
-    }
-    case AUTH__LOG_OUT__ERROR: {
       return {
         ...state,
         status: Status.ERROR,

@@ -124,7 +124,7 @@ export default class RegisterForm extends Component {
     return (
       <div className="widget__container register-form__container">
         <div className="widget__container-inner">
-          <div className="widget__body register-form__body border-color-3 clearfix">
+          <div className="widget__body register-form__body clearfix">
             <div className="form-inputs register-form__inputs">
               <TextInput
                 name="username"

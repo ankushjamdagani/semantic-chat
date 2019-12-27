@@ -104,7 +104,8 @@ class Home extends React.Component {
       messages,
       activeFriend,
       unseenMessages,
-      changeActiveFriend
+      changeActiveFriend,
+      tryLoggingOut
     } = this.props;
     const messageData = this.getMessageData(activeFriend, messages.data);
 
@@ -122,7 +123,7 @@ class Home extends React.Component {
                   changeActiveFriend={changeActiveFriend}
                   unseenMessages={unseenMessages}
                 />
-                <SidebarFooter />
+                <SidebarFooter tryLoggingOut={tryLoggingOut} />
               </div>
             </div>
             <div className="content__container">

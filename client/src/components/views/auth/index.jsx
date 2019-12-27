@@ -6,7 +6,6 @@ import {
   changeActiveView,
   tryRegisteringIn,
   tryLoggingIn,
-  tryLoggingOut,
   tryForgotPassword
 } from "./actions";
 
@@ -54,7 +53,7 @@ class Auth extends React.Component {
   render() {
     const { activeView, status, data } = this.props;
     return (
-      <div className="view__container auth__container">
+      <div className="view__container auth__container bg-grey-5">
         <div className="view__container--inner auth__inner-container">
           <div className="absolute-center">
             {(() => {
@@ -98,7 +97,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     changeActiveView: bindActionCreators(changeActiveView, dispatch),
     tryLoggingIn: bindActionCreators(tryLoggingIn, dispatch),
     tryRegisteringIn: bindActionCreators(tryRegisteringIn, dispatch),
-    tryLoggingOut: bindActionCreators(tryLoggingOut, dispatch),
     tryForgotPassword: bindActionCreators(tryForgotPassword, dispatch)
   };
 };

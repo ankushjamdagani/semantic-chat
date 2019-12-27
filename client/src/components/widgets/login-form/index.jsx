@@ -98,7 +98,7 @@ export default class LoginForm extends Component {
     return (
       <div className="widget__container login-form__container">
         <div className="widget__container-inner">
-          <div className="widget__body login-form__body border-color-3 clearfix">
+          <div className="widget__body login-form__body clearfix">
             <div className="form-inputs login-form__inputs">
               <EmailInput
                 name="email"
