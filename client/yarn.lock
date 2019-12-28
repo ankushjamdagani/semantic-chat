@@ -4915,6 +4915,11 @@ postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.17, postcss@^7.0.5, postcss@^7.0.
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
+postprocessing@^6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/postprocessing/-/postprocessing-6.9.0.tgz#e664a4df895a1b0a38efbcdf0bcb4962faed16c1"
+  integrity sha512-MBagzxYzvn53eG5HguMycr5DE2sKw8Jg9rEaeslVZHiz7M/wn8+Yvi8W2hlIypQG+0PlADJoksAUY9vTkKUdPQ==
+
 prettier@1.19.1:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
@@ -6214,6 +6219,11 @@ terser@^4.1.2:
     commander "^2.20.0"
     source-map "~0.6.1"
     source-map-support "~0.5.12"
+
+three@^0.112.1:
+  version "0.112.1"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.112.1.tgz#f8d8f4d0f8e5f753dac6260491b8209457fdc131"
+  integrity sha512-8I0O74hiYtKl3LgDNcPJbBGOlpekbcJ6fJnImmW3mFdeUFJ2H9Y3/UuUSW2sBdjrIlCM0gvOkaTEFlofO900TQ==
 
 through2@^2.0.0:
   version "2.0.5"

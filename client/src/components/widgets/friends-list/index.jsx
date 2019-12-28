@@ -79,7 +79,7 @@ class FriendsList extends React.Component {
                     {unseenMessages[friend._id] && (
                       <div className="friend-item__seen-count ts-xs bg-color-1 tc-white tw-very-heavy"></div>
                     )}
-                    <div className="friend-item__thumb ts-xl">
+                    <div className="friend-item__thumb ts-xl tw-very-heavy tf-styled">
                       {friend.username[0]}
                     </div>
                     <div className="friend-item__content">

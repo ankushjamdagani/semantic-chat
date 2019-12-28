@@ -14,7 +14,7 @@ class SidebarHeader extends React.Component {
           <div className="widget__body sidebar-header__body">
             <div className="user-info__container">
               <div className="user-info__body">
-                <div className="user__thumb ts-h3 tw-heavy">{userData.username[0]}</div>
+                <div className="user__thumb ts-h3 tw-very-heavy tf-styled">{userData.username[0]}</div>
                 <div className="user__name ts-md">{userData.username}</div>
               </div>
             </div>

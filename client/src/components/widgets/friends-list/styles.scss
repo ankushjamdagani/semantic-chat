@@ -56,9 +56,9 @@
       left: 26px;
     }
     &:hover {
-      background: $Color0Alpha;
+      background: $Grey4;
       .friend-item__content {
-        transform: translate(2px);
+        // transform: translate(2px);
       }
     }
     &.active {
